@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import logo from "@/public/images/logo.png"
 import { usePathname } from 'next/navigation'
 // Inline SVG icon components (replaces lucide-react)
 const ShoppingCart = ({ size = 24 }: { size?: number }) => (
@@ -52,7 +53,7 @@ const navItems: NavItem[] = [
   {
     label: 'Programs',
     dropdown: [
-      { label: 'Home (Abacus)', href: '/' },
+      { label: 'Home', href: '/' },
       { label: 'Vedic Math', href: '/vedic-math/' },
       { label: 'Mind Dart', href: '/mind-dart/' },
       { label: 'Hand Writing', href: '/hand-writing/' },
@@ -107,13 +108,13 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        'z-50 w-full transition-all duration-300',
+        'z-50 w-full transition-all duration-300  shadow-sm',
         scrolled
           ? 'sticky top-0 bg-white shadow-md'
           : 'relative bg-white'
       )}
     >
-      <div className="mx-auto max-w-[1200px] px-4">
+      <div className="mx-auto max-w-[1200px] ">
         <div
           className={cn(
             'flex items-center justify-between transition-all duration-300',
@@ -124,115 +125,134 @@ export default function Navbar() {
           <div className="branding flex-shrink-0">
             <Link href="/">
               <Image
-                src="/images/logo.png"
+                src={logo}
                 alt="Learning made easy"
-                width={158}
-                height={54}
+                width={200}
+                height={61}
                 priority
               />
             </Link>
           </div>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex">
-            <ul className="m-0 flex list-none p-0">
-              {navItems.map((item) => (
-                <li key={item.label} className="group relative">
-                  {item.href && !item.dropdown ? (
-                    <Link
-                      href={item.href}
-                      className={cn(
-                        'block px-4 py-[29px] font-["Plus_Jakarta_Sans",sans-serif] text-[12.5px] font-normal leading-none transition-colors duration-200',
-                        pathname === item.href
-                          ? 'text-[#ff6600]'
-                          : 'text-[#333333] hover:text-[#ff6600]'
-                      )}
-                    >
-                      {item.label}
-                    </Link>
-                  ) : (
-                    <>
-                      <button
-                        type="button"
+          <div className="flex items-center ">
+            {/* Desktop Nav */}
+            <nav className="hidden md:flex">
+              <ul className="m-0 flex list-none p-0">
+                {navItems.map((item) => (
+                  <li key={item.label} className="group relative">
+                    {item.href && !item.dropdown ? (
+                      <Link
+                        href={item.href}
                         className={cn(
-                          'block cursor-pointer border-0 bg-transparent px-4 py-[29px] font-["Plus_Jakarta_Sans",sans-serif] text-[12.5px] font-normal leading-none transition-colors duration-200',
-                          'text-[#333333] hover:text-[#ff6600] group-hover:text-[#ff6600]'
+                          'flex items-center px-4 py-[29px] text-[15px] font-normal leading-none transition-colors duration-200',
+                          pathname === item.href
+                            ? 'text-[#ff6600]'
+                            : 'text-[#000000] hover:text-[#ff6600]'
                         )}
                       >
-                        {item.label}
-                      </button>
-                      {item.dropdown && (
-                        <ul
+                        <span className={cn(
+                          "relative pb-[6px]",
+                          pathname === item.href
+                            ? "after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-[#ff6600]"
+                            : "after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-[#ff6600] after:scale-x-0 after:origin-left after:transition-transform after:duration-300 group-hover:after:scale-x-100"
+                        )}>
+                          {item.label}
+                        </span>
+                      </Link>
+                    ) : (
+                      <>
+                        <button
+                          type="button"
                           className={cn(
-                            'invisible absolute left-0 top-full z-[100] m-0 list-none p-2 opacity-0 transition-all duration-200',
-                            'min-w-[200px] rounded-[4px] bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)]',
-                            'group-hover:visible group-hover:opacity-100'
+                            'flex items-center cursor-pointer border-0 bg-transparent px-4 py-[29px] text-[15px] font-semibold leading-none transition-colors duration-200',
+                            'text-[#696969] hover:text-[#ff6600] group-hover:text-[#ff6600]'
                           )}
                         >
-                          {item.dropdown.map((sub) => (
-                            <li key={sub.label}>
-                              <Link
-                                href={sub.href}
-                                className={cn(
-                                  'block px-4 py-2 text-[13px] text-[#333333] no-underline transition-colors duration-150',
-                                  'hover:bg-[#f5f7fa] hover:text-[#ff6600]'
-                                )}
-                              >
-                                {sub.label}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </nav>
+                          <span className={cn(
+                            "relative pb-[6px] flex items-center",
+                            "after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-[#ff6600] after:scale-x-0 after:origin-left after:transition-transform after:duration-300 group-hover:after:scale-x-100"
+                          )}>
+                            {item.label}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="ml-1.5 opacity-70">
+                              <path d="m6 9 6 6 6-6"/>
+                            </svg>
+                          </span>
+                        </button>
+                        {item.dropdown && (
+                          <div
+                            className={cn(
+                              'invisible absolute left-0 top-full z-[100] w-[240px] opacity-0 transition-all duration-300',
+                              'bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)] border-b-[3px] border-[#ff6600]',
+                              'group-hover:visible group-hover:opacity-100 translate-y-2 group-hover:translate-y-0'
+                            )}
+                          >
+                            <ul className="m-0 list-none py-2 px-0">
+                              {item.dropdown.map((sub, index) => (
+                                <li key={sub.label}>
+                                  <Link
+                                    href={sub.href}
+                                    className={cn(
+                                      'block px-6 py-3 text-[14px] no-underline transition-colors duration-150',
+                                      index === 0 ? 'text-[#333333] font-normal' : 'text-[#777777] font-normal hover:text-[#ff6600]'
+                                    )}
+                                  >
+                                    {sub.label}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
-          {/* Header Actions */}
-          <div className="flex items-center gap-4">
-            {/* Cart */}
-            <Link
-              href="/cart/"
-              className="relative text-gray-700 transition-colors hover:text-[#ff6600]"
-              aria-label="Shopping cart"
-            >
-              <ShoppingCart size={20} />
-              <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-orange-500 text-[10px] font-semibold text-white">
-                0
-              </span>
-            </Link>
+            {/* Header Actions */}
+            <div className="flex items-center gap-4">
+              {/* Cart */}
+              <Link
+                href="/cart/"
+                className="relative text-gray-700 transition-colors hover:text-[#ff6600]"
+                aria-label="Shopping cart"
+              >
+                <ShoppingCart size={20} />
+                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-orange-500 text-[10px] font-semibold text-white">
+                  0
+                </span>
+              </Link>
 
-            {/* Account */}
-            <Link
-              href="/account/"
-              className="text-gray-700 transition-colors hover:text-[#ff6600]"
-              aria-label="My account"
-            >
-              <UserIcon size={20} />
-            </Link>
+              {/* Account */}
+              <Link
+                href="/account/"
+                className="text-gray-700 transition-colors hover:text-[#ff6600]"
+                aria-label="My account"
+              >
+                <UserIcon size={20} />
+              </Link>
 
-            {/* CTA Button */}
-            <Link
-              href="/check-speed/"
-              className={cn(
-                'hidden whitespace-nowrap rounded-[5px] bg-[#ff6600] px-5 py-3 text-sm font-semibold text-white no-underline transition-opacity duration-200 hover:opacity-90 md:inline-block'
-              )}
-            >
-              Check Your Abacus Speed
-            </Link>
+              {/* CTA Button */}
+              <Link
+                href="/check-speed/"
+                className={cn(
+                  'hidden whitespace-nowrap rounded-[5px] bg-[#ff6600] px-5 py-3 text-sm font-semibold text-white no-underline transition-opacity duration-200 hover:opacity-90 md:inline-block'
+                )}
+              >
+                Check Your Abacus Speed
+              </Link>
 
-            {/* Hamburger */}
-            <button
-              type="button"
-              className="flex flex-col items-center justify-center gap-1 text-gray-700 md:hidden"
-              onClick={() => setMobileOpen((prev) => !prev)}
-              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-            >
-              {mobileOpen ? <XIcon size={22} /> : <MenuIcon size={22} />}
-            </button>
+              {/* Hamburger */}
+              <button
+                type="button"
+                className="flex flex-col items-center justify-center gap-1 text-gray-700 md:hidden"
+                onClick={() => setMobileOpen((prev) => !prev)}
+                aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+              >
+                {mobileOpen ? <XIcon size={22} /> : <MenuIcon size={22} />}
+              </button>
+            </div>
           </div>
         </div>
       </div>

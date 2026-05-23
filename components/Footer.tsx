@@ -193,12 +193,12 @@ export default function Footer() {
               height={54}
               style={{ marginBottom: "16px" }}
             />
-            <address
+            <address className="text-[#000]"
               style={{
                 fontStyle: "normal",
                 fontSize: "14px",
-                color: "rgb(105, 105, 105)",
                 lineHeight: 1.8,
+                color: "#000000",
               }}
             >
               Xtragenius Learning Systems,

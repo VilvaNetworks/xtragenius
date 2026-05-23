@@ -22,11 +22,18 @@ export default function HeroSection() {
 
   return (
     <>
-      <section className="border-b border-[#ebebeb] bg-white py-3">
+      <section className=" bg-white py-3">
         <div className="mx-auto max-w-[1200px] px-4">
           <nav aria-label="breadcrumb">
-            <span className="text-sm text-[#696969]">Home</span>
+            <span className="text-[14px] text-[#696969]">Home</span>
           </nav>
+        </div>
+      </section>
+
+      {/* Page Title */}
+      <section className="bg-white pt-13 pb-12">
+        <div className="mx-auto max-w-[1200px] px-4 text-center">
+          <h1 className="text-[44px] font-bold text-[#333333]">Home</h1>
         </div>
       </section>
 
@@ -36,11 +43,10 @@ export default function HeroSection() {
 
             {/* Left column – Text content */}
             <div
-              className="relative flex flex-1 flex-col justify-center max-md:order-2 max-md:flex-none max-md:w-full"
+              className="relative flex flex-1 flex-col justify-center max-md:order-2 max-md:flex-none max-md:w-full "
               style={{ paddingTop: "40px", paddingBottom: "40px" }}
             >
               
-
               <AnimateOnScroll delay={0}>
               <h2
                 className="font-sans font-bold leading-[1.17] text-[#3f3a64]"
@@ -70,23 +76,27 @@ export default function HeroSection() {
               </AnimateOnScroll>
 
               <AnimateOnScroll delay={300}>
-              <Link
-                href="#"
-                className="flex items-center gap-1 font-semibold text-[#8c89a2] transition-colors duration-[250ms] hover:text-[#ff6600]"
+              <div
+                className="flex items-center font-semibold text-[#8c89a2]"
                 style={{ fontSize: "15px" }}
               >
-                Wanna learn more?&nbsp;&nbsp;{" "}
-                <span className="font-semibold text-[#ff6600] underline underline-offset-2">
-                  Click here
-                </span>{" "}
-                <span className="text-[#ff6600]">→</span>
-              </Link>
+                Wanna learn more?&nbsp;&nbsp;
+                <Link
+                  href="#"
+                  className="group/link relative inline-flex items-center gap-1 pb-[2px]"
+                >
+                  <span className="absolute left-0 bottom-0 h-[1.5px] w-full bg-[#e6e6e6]"></span>
+                  <span className="absolute left-0 bottom-0 h-[1.5px] w-full bg-[#ff6600] scale-x-0 origin-left transition-transform duration-300 group-hover/link:scale-x-100 z-10"></span>
+                  <span className="font-semibold text-[#ff6600] relative z-20">Click here</span>
+                  <span className="text-[#ff6600] relative z-20">→</span>
+                </Link>
+              </div>
               </AnimateOnScroll>
             </div>
 
             {/* Right column – Hero image with decorations */}
             <div
-              className="relative flex flex-1 items-center justify-center max-md:order-1 max-md:flex-none max-md:w-full"
+              className="relative flex flex-1 items-center justify-center max-md:order-1 max-md:flex-none max-md:w-full pt-[40px]"
               style={{ minHeight: "580px" }}
             >
 
