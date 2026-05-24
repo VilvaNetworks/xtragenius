@@ -58,7 +58,7 @@ const navItems: NavItem[] = [
       { label: 'Mind Dart', href: '/mind-dart/' },
       { label: 'Hand Writing', href: '/hand-writing/' },
       { label: 'Short Courses', href: '/courses/' },
-      { label: 'Online Learning Portal', href: '/online-learning-portal/' },
+      { label: 'Online Learning Portal', href: '/http://portal.xtragenius.com/' },
     ],
   },
   {
