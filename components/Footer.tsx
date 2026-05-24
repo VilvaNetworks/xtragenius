@@ -1,6 +1,9 @@
+"use client";
+
 import type { CSSProperties, SVGProps } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 function FacebookIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -125,12 +128,19 @@ const linkStyle: CSSProperties = {
 };
 
 function FooterLink({ href, label }: { href: string; label: string }) {
+  const pathname = usePathname();
+  // Safe check if it's an anchor link, root path, or matches subpath
+  const isActive = href !== '#' && (
+    (href === '/' && pathname === '/') ||
+    (href !== '/' && pathname.startsWith(href))
+  );
+
   return (
     <li>
       <Link
         href={href}
         style={linkStyle}
-        className="hover:text-[rgb(255,102,0)]"
+        className={isActive ? "text-[rgb(255,102,0)] transition-colors" : "hover:text-[rgb(255,102,0)] transition-colors"}
       >
         {label}
       </Link>

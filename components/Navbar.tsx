@@ -94,6 +94,17 @@ const navItems: NavItem[] = [
   { label: 'Contact us', href: '/contact-us/' },
 ]
 
+const isItemActive = (item: NavItem | DropdownItem, pathname: string): boolean => {
+  if (item.href) {
+    if (item.href === '/' && pathname === '/') return true;
+    if (item.href !== '/' && pathname.startsWith(item.href)) return true;
+  }
+  if (item.dropdown) {
+    return item.dropdown.some(sub => isItemActive(sub, pathname));
+  }
+  return false;
+};
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -152,14 +163,14 @@ export default function Navbar() {
                         href={item.href}
                         className={cn(
                           'flex items-center px-4 py-[29px] text-[15px] font-normal leading-none transition-colors duration-200',
-                          pathname === item.href
+                          isItemActive(item, pathname)
                             ? 'text-[#ff6600]'
                             : 'text-[#000000] hover:text-[#ff6600]'
                         )}
                       >
                         <span className={cn(
                           "relative pb-[6px]",
-                          pathname === item.href
+                          isItemActive(item, pathname)
                             ? "after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-[#ff6600]"
                             : "after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-[#ff6600] after:scale-x-0 after:origin-left after:transition-transform after:duration-300 group-hover:after:scale-x-100"
                         )}>
@@ -172,12 +183,14 @@ export default function Navbar() {
                           type="button"
                           className={cn(
                             'flex items-center cursor-pointer border-0 bg-transparent px-4 py-[29px] text-[15px] font-semibold leading-none transition-colors duration-200',
-                            'text-[#696969] hover:text-[#ff6600] group-hover:text-[#ff6600]'
+                            isItemActive(item, pathname) ? 'text-[#ff6600]' : 'text-[#696969] hover:text-[#ff6600] group-hover:text-[#ff6600]'
                           )}
                         >
                           <span className={cn(
                             "relative pb-[6px] flex items-center",
-                            "after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-[#ff6600] after:scale-x-0 after:origin-left after:transition-transform after:duration-300 group-hover:after:scale-x-100"
+                            isItemActive(item, pathname)
+                              ? "after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-[#ff6600]"
+                              : "after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-[#ff6600] after:scale-x-0 after:origin-left after:transition-transform after:duration-300 group-hover:after:scale-x-100"
                           )}>
                             {item.label}
                             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="ml-1.5 opacity-70">
@@ -251,16 +264,29 @@ export default function Navbar() {
             {/* Header Actions */}
             <div className="flex items-center gap-4">
               {/* Cart */}
-              <Link
-                href="/cart/"
-                className="relative text-gray-700 transition-colors hover:text-[#ff6600]"
-                aria-label="Shopping cart"
-              >
-                <ShoppingCart size={20} />
-                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-orange-500 text-[10px] font-semibold text-white">
-                  0
-                </span>
-              </Link>
+              <div className="relative group/cart flex items-center h-full">
+                <Link
+                  href="/cart/"
+                  className="relative text-gray-700 transition-colors hover:text-[#ff6600] py-4 flex items-center"
+                  aria-label="Shopping cart"
+                >
+                  <ShoppingCart size={20} />
+                  <span className="absolute -right-1.5 top-2.5 flex h-4 w-4 items-center justify-center rounded-full bg-orange-500 text-[10px] font-semibold text-white">
+                    0
+                  </span>
+                </Link>
+
+                {/* Cart Dropdown Modal */}
+                <div className="invisible opacity-0 translate-y-2 group-hover/cart:visible group-hover/cart:opacity-100 group-hover/cart:translate-y-0 absolute right-0 top-full w-[300px] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.1)] border-t-[3px] border-[#ff6600] p-8 text-center transition-all duration-300 z-50 cursor-default">
+                  <div className="flex justify-center mb-6 text-[#ff6600]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><circle cx="8" cy="21" r="2" /><circle cx="19" cy="21" r="2" /><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" /></svg>
+                  </div>
+                  <p className="text-[#888888] italic text-[16px] mb-8">Your cart is empty</p>
+                  <Link href="/shop" className="block w-full bg-[#ff6600] text-white py-3 text-[15px] font-bold rounded hover:bg-[#e65c00] transition-colors">
+                    Browse Shop
+                  </Link>
+                </div>
+              </div>
 
               {/* Account */}
               <Link
