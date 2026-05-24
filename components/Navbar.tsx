@@ -32,6 +32,7 @@ import { cn } from '@/lib/utils'
 type DropdownItem = {
   label: string
   href: string
+  dropdown?: DropdownItem[]
 }
 
 type NavItem = {
@@ -58,7 +59,7 @@ const navItems: NavItem[] = [
       { label: 'Mind Dart', href: '/mind-dart/' },
       { label: 'Hand Writing', href: '/hand-writing/' },
       { label: 'Short Courses', href: '/courses/' },
-      { label: 'Online Learning Portal', href: '/http://portal.xtragenius.com/' },
+      { label: 'Online Learning Portal', href: 'http://portal.xtragenius.com/' },
     ],
   },
   {
@@ -66,18 +67,24 @@ const navItems: NavItem[] = [
     dropdown: [
       { label: 'Offline Competition', href: '/offline-competition/' },
       { label: 'Online Competition', href: '/online-competition/' },
-      { label: 'Portal Login', href: '/portal-login/' },
+      { label: 'Rank', href: '/rank/' },
+      { label: 'Portal Login', href: 'https://student.xtragenius.com/login' },
     ],
   },
   {
     label: 'Shop',
     dropdown: [
-      { label: 'Books', href: '#' },
-      { label: 'Franchisee books', href: '/product-category/franchisee-books/' },
-      { label: 'School books', href: '/product-category/school-books/' },
-      { label: 'Vedic maths', href: '/product-category/vedic-maths/' },
-      { label: 'Speed writing', href: '/product-category/speed-writing/' },
-      { label: 'Hand writting', href: '/product-category/hand-writting/' },
+      {
+        label: 'Books',
+        href: '#',
+        dropdown: [
+          { label: 'Franchisee books', href: '/product-category/franchisee-books/' },
+          { label: 'School books', href: '/product-category/school-books/' },
+          { label: 'Vedic maths', href: '/product-category/vedic-maths/' },
+          { label: 'Speed writing', href: '/product-category/speed-writing/' },
+          { label: 'Hand writting', href: '/product-category/hand-writting/' },
+        ],
+      },
       { label: 'Flash cards', href: '/product-category/flash-cards/' },
       { label: 'Abacus tool', href: '/product-category/abacus-tool/' },
       { label: 'Bag', href: '/product-category/bag/' },
@@ -187,19 +194,50 @@ export default function Navbar() {
                             )}
                           >
                             <ul className="m-0 list-none py-2 px-0">
-                              {item.dropdown.map((sub, index) => (
-                                <li key={sub.label}>
-                                  <Link
-                                    href={sub.href}
-                                    className={cn(
-                                      'block px-6 py-3 text-[14px] no-underline transition-colors duration-150',
-                                      index === 0 ? 'text-[#333333] font-normal' : 'text-[#777777] font-normal hover:text-[#ff6600]'
+                              {item.dropdown.map((sub, index) => {
+                                const isExternal = sub.href.startsWith('http');
+                                return (
+                                  <li key={sub.label} className="relative group/sub">
+                                    <Link
+                                      href={sub.href}
+                                      target={isExternal ? '_blank' : undefined}
+                                      rel={isExternal ? 'noopener noreferrer' : undefined}
+                                      className={cn(
+                                        'px-6 py-3 text-[14px] no-underline transition-colors duration-150 flex items-center justify-between',
+                                        index === 0 && !sub.dropdown ? 'text-[#333333] font-normal' : 'text-[#777777] font-normal hover:text-[#ff6600]'
+                                      )}
+                                    >
+                                      {sub.label}
+                                      {sub.dropdown && (
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-70 -rotate-90">
+                                          <path d="m6 9 6 6 6-6" />
+                                        </svg>
+                                      )}
+                                    </Link>
+                                    {sub.dropdown && (
+                                      <div className="invisible absolute left-full top-0 z-[101] w-[240px] opacity-0 transition-all duration-300 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)] border-b-[3px] border-[#ff6600] group-hover/sub:visible group-hover/sub:opacity-100 translate-x-2 group-hover/sub:translate-x-0">
+                                        <ul className="m-0 list-none py-2 px-0">
+                                          {sub.dropdown.map((nested) => {
+                                            const isNestedExternal = nested.href.startsWith('http');
+                                            return (
+                                              <li key={nested.label}>
+                                                <Link
+                                                  href={nested.href}
+                                                  target={isNestedExternal ? '_blank' : undefined}
+                                                  rel={isNestedExternal ? 'noopener noreferrer' : undefined}
+                                                  className="block px-6 py-3 text-[14px] text-[#777777] font-normal no-underline transition-colors duration-150 hover:text-[#ff6600]"
+                                                >
+                                                  {nested.label}
+                                                </Link>
+                                              </li>
+                                            );
+                                          })}
+                                        </ul>
+                                      </div>
                                     )}
-                                  >
-                                    {sub.label}
-                                  </Link>
-                                </li>
-                              ))}
+                                  </li>
+                                );
+                              })}
                             </ul>
                           </div>
                         )}
