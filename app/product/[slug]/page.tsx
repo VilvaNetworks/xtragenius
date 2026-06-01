@@ -8,6 +8,8 @@ import ProductInfo from "@/components/shop/ProductInfo";
 import ProductTabs from "@/components/shop/ProductTabs";
 import { getProductBySlug } from "@/lib/data/products";
 
+export const runtime = 'edge';
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const product = getProductBySlug(slug);

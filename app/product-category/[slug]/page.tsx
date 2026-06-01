@@ -6,6 +6,8 @@ import Footer from "@/components/Footer";
 import ProductCard from "@/components/shop/ProductCard";
 import { productsData, getCategoryName } from "@/lib/data/products";
 
+export const runtime = 'edge';
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const categoryName = getCategoryName(slug);
