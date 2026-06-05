@@ -287,7 +287,7 @@ export default function Footer() {
               margin: 0,
             }}
           >
-            © 2022 Xtragenius. All Rights Reserved
+            © 2022 - {new Date().getFullYear()} Xtragenius. All Rights Reserved
           </p>
         </div>
       </div>

@@ -1,0 +1,31 @@
+# Xtragenius Learning Systems
+
+Welcome to Xtragenius! We empower young learners to achieve academic success through proven abacus training, Vedic maths, and cognitive skills development.
+
+## Core Services & Programs
+- **Abacus Training**: Boost mental arithmetic skills, memory, and focus in children aged 5-14.
+- **Vedic Math**: Simplify math calculations with speed math techniques.
+- **Mind Dart**: Memory, visualization, and brain development program.
+- **Handwriting**: Improve neatness and speed of writing.
+
+## Navigation Index
+- [Home Page](https://xtragenius.com/)
+- [Company Profile](https://xtragenius.com/company/)
+- [MD's Message](https://xtragenius.com/mds-message/)
+- [Our Team](https://xtragenius.com/our-team/)
+- [Our Culture](https://xtragenius.com/our-culture/)
+- [Partner With Us (Franchise Details)](https://xtragenius.com/partner-with-us/)
+- [Contact Us](https://xtragenius.com/contact-us/)
+- [FAQs](https://xtragenius.com/faqs/)
+
+## Programs & Courses Detail
+- [All Courses](https://xtragenius.com/courses/)
+- [Abacus Program Page](https://xtragenius.com/courses/abacus/)
+- [Vedic Math Program Page](https://xtragenius.com/vedic-math/)
+- [Mind Dart Program Page](https://xtragenius.com/mind-dart/)
+- [Handwriting Program Page](https://xtragenius.com/hand-writing/)
+
+## Competitions
+- [Offline National Competition](https://xtragenius.com/offline-competition/)
+- [Online Global Competition](https://xtragenius.com/online-competition/)
+- [Student Rankings & Results](https://xtragenius.com/rank/)
