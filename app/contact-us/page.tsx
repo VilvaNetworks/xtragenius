@@ -258,7 +258,7 @@ export default function ContactUsPage() {
         <AnimateOnScroll delay={100}>
           <section className="w-full h-[400px]">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.4357380183145!2d80.22238471482255!3d13.065147490786016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52668571060935%3A0xc3f8373b75baec!2sXtragenius%20Learning%20Systems!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+              src="https://maps.google.com/maps?q=Xtragenius%20Learning%20Systems,%20No:9/60,Sowrasthra%20Nagar%2010th%20cross%20st,%20Choolaimedu,%20Chennai%20-%20600%20094&t=&z=16&ie=UTF8&iwloc=&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0 }}

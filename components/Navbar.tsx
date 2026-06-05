@@ -96,8 +96,14 @@ const navItems: NavItem[] = [
 
 const isItemActive = (item: NavItem | DropdownItem, pathname: string): boolean => {
   if (item.href) {
-    if (item.href === '/' && pathname === '/') return true;
-    if (item.href !== '/' && pathname.startsWith(item.href)) return true;
+    const normalize = (p: string) => p.replace(/\/$/, '') || '/';
+    const normalizedHref = normalize(item.href);
+    const normalizedPathname = normalize(pathname);
+
+    if (normalizedHref === '/') {
+      return normalizedPathname === '/';
+    }
+    return normalizedPathname === normalizedHref || normalizedPathname.startsWith(normalizedHref + '/');
   }
   if (item.dropdown) {
     return item.dropdown.some(sub => isItemActive(sub, pathname));
@@ -108,7 +114,9 @@ const isItemActive = (item: NavItem | DropdownItem, pathname: string): boolean =
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+  const [openDropdowns, setOpenDropdowns] = useState<Record<string, boolean>>({
+    'About Us': true
+  })
   const pathname = usePathname()
 
   useEffect(() => {
@@ -119,20 +127,34 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const toggleMobileDropdown = (label: string) => {
-    setOpenDropdown((prev) => (prev === label ? null : label))
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [mobileOpen])
+
+  const toggleDropdown = (label: string) => {
+    setOpenDropdowns((prev) => ({
+      ...prev,
+      [label]: !prev[label]
+    }))
   }
 
   return (
     <header
       className={cn(
-        'z-50 w-full transition-all duration-300  shadow-sm',
+        'z-50 w-full transition-all duration-300 shadow-sm',
         scrolled
           ? 'sticky top-0 bg-white shadow-md'
           : 'relative bg-white'
       )}
     >
-      <div className="mx-auto max-w-[1200px] ">
+      <div className="mx-auto max-w-[1400px] px-4">
         <div
           className={cn(
             'flex items-center justify-between transition-all duration-300',
@@ -145,16 +167,16 @@ export default function Navbar() {
               <Image
                 src={logo}
                 alt="Learning made easy"
-                width={200}
+                width={160}
                 height={61}
                 priority
               />
             </Link>
           </div>
 
-          <div className="flex items-center ">
+          <div className="flex items-center">
             {/* Desktop Nav */}
-            <nav className="hidden md:flex">
+            <nav className="hidden lg:flex">
               <ul className="m-0 flex list-none p-0">
                 {navItems.map((item) => (
                   <li key={item.label} className="group relative">
@@ -271,7 +293,7 @@ export default function Navbar() {
                   aria-label="Shopping cart"
                 >
                   <ShoppingCart size={20} />
-                  <span className="absolute -right-1.5 top-2.5 flex h-4 w-4 items-center justify-center rounded-full bg-orange-500 text-[10px] font-semibold text-white">
+                  <span className="absolute -right-1.5 top-2.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#ff6600] text-[10px] font-semibold text-white">
                     0
                   </span>
                 </Link>
@@ -282,7 +304,7 @@ export default function Navbar() {
                     <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><circle cx="8" cy="21" r="2" /><circle cx="19" cy="21" r="2" /><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" /></svg>
                   </div>
                   <p className="text-[#888888] italic text-[16px] mb-8">Your cart is empty</p>
-                  <Link href="/shop" className="block w-full bg-[#ff6600] text-white py-3 text-[15px] font-bold rounded hover:bg-[#e65c00] transition-colors">
+                  <Link href="/product-category/abacus-tool" className="block w-full bg-[#ff6600] text-white py-3 text-[15px] font-bold rounded hover:bg-[#e65c00] transition-colors">
                     Browse Shop
                   </Link>
                 </div>
@@ -290,7 +312,7 @@ export default function Navbar() {
 
               {/* Account */}
               <Link
-                href="/account/"
+                href="https://xtragenius.com/wp-login.php"
                 className="text-gray-700 transition-colors hover:text-[#ff6600]"
                 aria-label="My account"
               >
@@ -299,9 +321,10 @@ export default function Navbar() {
 
               {/* CTA Button */}
               <Link
-                href="/check-speed/"
+                href="https://student.xtragenius.com/register"
+                target="_blank"
                 className={cn(
-                  'hidden whitespace-nowrap rounded-[5px] bg-[#ff6600] px-5 py-3 text-sm font-semibold text-white no-underline transition-opacity duration-200 hover:opacity-90 md:inline-block'
+                  'hidden whitespace-nowrap rounded-[5px] bg-[#ff6600] px-5 py-3 text-sm font-semibold text-white no-underline transition-opacity duration-200 hover:opacity-90 lg:inline-block'
                 )}
               >
                 Check Your Abacus Speed
@@ -310,88 +333,195 @@ export default function Navbar() {
               {/* Hamburger */}
               <button
                 type="button"
-                className="flex flex-col items-center justify-center gap-1 text-gray-700 md:hidden"
-                onClick={() => setMobileOpen((prev) => !prev)}
-                aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+                className="flex flex-col items-center justify-center gap-1 text-gray-700 hover:text-[#ff6600] transition-colors cursor-pointer lg:hidden"
+                onClick={() => setMobileOpen(true)}
+                aria-label="Open sidebar"
               >
-                {mobileOpen ? <XIcon size={22} /> : <MenuIcon size={22} />}
+                <MenuIcon size={26} />
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="w-full border-t border-gray-100 bg-white shadow-md md:hidden">
-          <ul className="m-0 list-none p-0">
-            {navItems.map((item) => (
-              <li key={item.label} className="border-b border-gray-100 last:border-b-0">
-                {item.href && !item.dropdown ? (
-                  <Link
-                    href={item.href}
-                    className={cn(
-                      'block px-4 py-3 text-sm font-medium transition-colors duration-150',
-                      pathname === item.href
-                        ? 'text-[#ff6600]'
-                        : 'text-[#333333] hover:text-[#ff6600]'
-                    )}
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                ) : (
-                  <>
-                    <button
-                      type="button"
-                      className={cn(
-                        'flex w-full items-center justify-between px-4 py-3 text-sm font-medium transition-colors duration-150',
-                        openDropdown === item.label
-                          ? 'text-[#ff6600]'
-                          : 'text-[#333333] hover:text-[#ff6600]'
-                      )}
-                      onClick={() => toggleMobileDropdown(item.label)}
-                    >
-                      {item.label}
-                      <span className="ml-2 text-xs">
-                        {openDropdown === item.label ? '▲' : '▼'}
-                      </span>
-                    </button>
-                    {openDropdown === item.label && item.dropdown && (
-                      <ul className="m-0 list-none bg-[#f5f7fa] p-0">
-                        {item.dropdown.map((sub) => (
-                          <li key={sub.label} className="border-t border-gray-100">
-                            <Link
-                              href={sub.href}
-                              className="block px-8 py-2.5 text-[13px] text-[#333333] no-underline transition-colors duration-150 hover:text-[#ff6600]"
-                              onClick={() => {
-                                setMobileOpen(false)
-                                setOpenDropdown(null)
-                              }}
-                            >
-                              {sub.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </>
-                )}
-              </li>
-            ))}
-            {/* Mobile CTA */}
-            <li className="p-4">
-              <Link
-                href="/check-speed/"
-                className="block w-full rounded-[5px] bg-[#ff6600] px-5 py-3 text-center text-sm font-semibold text-white no-underline transition-opacity duration-200 hover:opacity-90"
-                onClick={() => setMobileOpen(false)}
-              >
-                Check Your Abacus Speed
-              </Link>
-            </li>
-          </ul>
+      {/* Backdrop Overlay */}
+      <div
+        className={cn(
+          "fixed inset-0 !bg-black/40 transition-opacity duration-300 ease-in-out",
+          mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        )}
+        style={{ zIndex: 999 }}
+        onClick={() => setMobileOpen(false)}
+      />
+
+      {/* Sidebar Panel */}
+      <div
+        className={cn(
+          "fixed top-0 right-0 bottom-0 w-[300px] sm:w-[350px] bg-[#001eff] text-white shadow-2xl transition-transform duration-300 ease-in-out flex flex-col",
+          mobileOpen ? "translate-x-0" : "translate-x-full"
+        )}
+        style={{ zIndex: 1000 }}
+      >
+        {/* Sidebar Header */}
+        <div className="bg-white px-6 py-4 flex items-center justify-between border-b border-gray-100 flex-shrink-0">
+          <Link href="/" onClick={() => setMobileOpen(false)}>
+            <Image
+              src={logo}
+              alt="Learning made easy"
+              width={160}
+              height={49}
+              priority
+            />
+          </Link>
+          <button
+            type="button"
+            className="text-gray-800 hover:text-red-500 transition-colors p-1 bg-transparent border-0 cursor-pointer outline-none flex items-center justify-center"
+            onClick={() => setMobileOpen(false)}
+            aria-label="Close sidebar"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
         </div>
-      )}
+
+        {/* Sidebar Navigation Items */}
+        <div className="flex-1 overflow-y-auto px-6 py-6 select-none">
+          <nav className="flex flex-col">
+            <ul className="m-0 list-none p-0 flex flex-col gap-1">
+              {navItems.map((item) => {
+                const hasDropdown = !!item.dropdown;
+                const isExpanded = openDropdowns[item.label];
+
+                return (
+                  <li key={item.label} className="border-b border-white/10 last:border-b-0 py-1">
+                    {hasDropdown ? (
+                      <div>
+                        <button
+                          type="button"
+                          className="flex w-full items-center justify-between py-3 text-[16px] font-semibold text-white bg-transparent border-0 outline-none cursor-pointer text-left"
+                          onClick={() => toggleDropdown(item.label)}
+                        >
+                          <span>{item.label}</span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className={cn(
+                              "transition-transform duration-200 opacity-85",
+                              isExpanded ? "rotate-180" : ""
+                            )}
+                          >
+                            <path d="m6 9 6 6 6-6" />
+                          </svg>
+                        </button>
+
+                        {/* Accordion Dropdown Content */}
+                        <div
+                          className={cn(
+                            "transition-all duration-300 overflow-hidden",
+                            isExpanded ? "max-h-[800px] opacity-100 mb-2" : "max-h-0 opacity-0"
+                          )}
+                        >
+                          <ul className="m-0 list-none pl-4 pr-2 py-1 flex flex-col gap-1.5 border-l border-white/20">
+                            {item.dropdown?.map((sub) => {
+                              const isSubDropdown = !!sub.dropdown;
+                              const isSubExpanded = openDropdowns[`${item.label}-${sub.label}`];
+
+                              return (
+                                <li key={sub.label}>
+                                  {isSubDropdown ? (
+                                    <div>
+                                      <button
+                                        type="button"
+                                        className="flex w-full items-center justify-between py-2 text-[14px] font-medium text-white/90 bg-transparent border-0 outline-none cursor-pointer hover:text-white text-left"
+                                        onClick={() => toggleDropdown(`${item.label}-${sub.label}`)}
+                                      >
+                                        <span>{sub.label}</span>
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="14"
+                                          height="14"
+                                          viewBox="0 0 24 24"
+                                          fill="none"
+                                          stroke="currentColor"
+                                          strokeWidth="2.5"
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          className={cn(
+                                            "transition-transform duration-200 opacity-80",
+                                            isSubExpanded ? "rotate-180" : ""
+                                          )}
+                                        >
+                                          <path d="m6 9 6 6 6-6" />
+                                        </svg>
+                                      </button>
+                                      <div
+                                        className={cn(
+                                          "transition-all duration-300 overflow-hidden",
+                                          isSubExpanded ? "max-h-[300px] opacity-100 my-1" : "max-h-0 opacity-0"
+                                        )}
+                                      >
+                                        <ul className="m-0 list-none pl-4 py-1 flex flex-col gap-1 border-l border-white/10">
+                                          {sub.dropdown?.map((nested) => {
+                                            const isNestedExternal = nested.href.startsWith("http");
+                                            return (
+                                              <li key={nested.label}>
+                                                <Link
+                                                  href={nested.href}
+                                                  target={isNestedExternal ? "_blank" : undefined}
+                                                  rel={isNestedExternal ? "noopener noreferrer" : undefined}
+                                                  className="block py-1.5 text-[13px] text-white/70 hover:text-white transition-colors"
+                                                  onClick={() => setMobileOpen(false)}
+                                                >
+                                                  {nested.label}
+                                                </Link>
+                                              </li>
+                                            );
+                                          })}
+                                        </ul>
+                                      </div>
+                                    </div>
+                                  ) : (
+                                    <Link
+                                      href={sub.href}
+                                      target={sub.href.startsWith("http") ? "_blank" : undefined}
+                                      rel={sub.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                                      className="block py-2 text-[14px] text-white/90 hover:text-white transition-colors"
+                                      onClick={() => setMobileOpen(false)}
+                                    >
+                                      {sub.label}
+                                    </Link>
+                                  )}
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </div>
+                      </div>
+                    ) : (
+                      <Link
+                        href={item.href || "#"}
+                        className="block py-3 text-[16px] font-semibold text-white hover:text-white/80 transition-colors"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        </div>
+      </div>
     </header>
   )
 }

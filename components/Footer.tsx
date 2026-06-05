@@ -86,28 +86,28 @@ function LinkedinIcon(props: SVGProps<SVGSVGElement>) {
 }
 
 const aboutLinks = [
-  { label: "Company", href: "#" },
-  { label: "Our MD's Message", href: "#" },
-  { label: "Our Team", href: "#" },
-  { label: "Our Culture", href: "#" },
-  { label: "Partner With Us", href: "#" },
-  { label: "Become A Trainer", href: "#" },
+  { label: "Company", href: "/company/" },
+  { label: "Our MD's Message", href: "/mds-message/" },
+  { label: "Our Team", href: "/our-team/" },
+  { label: "Our Culture", href: "/our-culture/" },
+  { label: "Partner With Us", href: "/partner-with-us/" },
+  { label: "Become A Trainer", href: "/partner-with-us/" },
 ];
 
 const programLinks = [
-  { label: "Abacus", href: "#" },
-  { label: "Vedic Math", href: "#" },
-  { label: "Mind Draft", href: "#" },
-  { label: "Hand Writing", href: "#" },
-  { label: "Short Courses", href: "#" },
-  { label: "Online Learning Portal", href: "#" },
-  { label: "FAQs", href: "#" },
+  { label: "Abacus", href: "/courses/abacus/" },
+  { label: "Vedic Math", href: "/vedic-math/" },
+  { label: "Mind Draft", href: "/mind-dart/" },
+  { label: "Hand Writing", href: "/hand-writing/" },
+  { label: "Short Courses", href: "/courses/" },
+  { label: "Online Learning Portal", href: "http://portal.xtragenius.com/" },
+  { label: "FAQs", href: "/faqs/" },
 ];
 
 const moreInfoLinks = [
-  { label: "Terms & Conditions", href: "#" },
-  { label: "Privacy Policy", href: "#" },
-  { label: "Refund & Cancellation", href: "#" },
+  { label: "Terms & Conditions", href: "/terms-conditions/" },
+  { label: "Privacy Policy", href: "/privacy-policy/" },
+  { label: "Refund & Cancellation", href: "/refund-cancellation/" },
 ];
 
 const headingStyle: CSSProperties = {
@@ -120,7 +120,6 @@ const headingStyle: CSSProperties = {
 
 const linkStyle: CSSProperties = {
   fontSize: "14px",
-  color: "rgb(105, 105, 105)",
   textDecoration: "none",
   lineHeight: 2,
   display: "block",
@@ -140,7 +139,7 @@ function FooterLink({ href, label }: { href: string; label: string }) {
       <Link
         href={href}
         style={linkStyle}
-        className={isActive ? "text-[rgb(255,102,0)] transition-colors" : "hover:text-[rgb(255,102,0)] transition-colors"}
+        className={isActive ? "text-[#ff6600] transition-colors" : "text-[#696969] hover:text-[#ff6600] transition-colors"}
       >
         {label}
       </Link>
@@ -196,13 +195,6 @@ export default function Footer() {
           {/* Col 1: Address */}
           <div style={{ minWidth: "240px", flexShrink: 0 }}>
             <h5 style={headingStyle}>Address</h5>
-            <Image
-              src="/images/logo-footer.png"
-              alt="Xtragenius"
-              width={158}
-              height={54}
-              style={{ marginBottom: "16px" }}
-            />
             <address className="text-[#000]"
               style={{
                 fontStyle: "normal",
@@ -228,32 +220,32 @@ export default function Footer() {
             >
               <Link
                 href="#"
-                style={{ color: "rgb(105, 105, 105)", transition: "color 0.2s" }}
-                className="hover:text-[rgb(255,102,0)]"
+                style={{ transition: "color 0.2s" }}
+                className="text-[#696969] hover:text-[#ff6600]"
                 aria-label="Facebook"
               >
                 <FacebookIcon />
               </Link>
               <Link
                 href="#"
-                style={{ color: "rgb(105, 105, 105)", transition: "color 0.2s" }}
-                className="hover:text-[rgb(255,102,0)]"
+                style={{ transition: "color 0.2s" }}
+                className="text-[#696969] hover:text-[#ff6600]"
                 aria-label="Twitter"
               >
                 <TwitterIcon />
               </Link>
               <Link
                 href="#"
-                style={{ color: "rgb(105, 105, 105)", transition: "color 0.2s" }}
-                className="hover:text-[rgb(255,102,0)]"
+                style={{ transition: "color 0.2s" }}
+                className="text-[#696969] hover:text-[#ff6600]"
                 aria-label="Instagram"
               >
                 <InstagramIcon />
               </Link>
               <Link
                 href="#"
-                style={{ color: "rgb(105, 105, 105)", transition: "color 0.2s" }}
-                className="hover:text-[rgb(255,102,0)]"
+                style={{ transition: "color 0.2s" }}
+                className="text-[#696969] hover:text-[#ff6600]"
                 aria-label="LinkedIn"
               >
                 <LinkedinIcon />
