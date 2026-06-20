@@ -1,9 +1,10 @@
-import { promises as fs } from "fs";
-import path from "path";
+export const runtime = "edge";
 
-export async function GET() {
-  const filePath = path.join(process.cwd(), "public", "llms.txt");
-  const fileContent = await fs.readFile(filePath, "utf8");
+export async function GET(request: Request) {
+  const url = new URL(request.url);
+  const fileUrl = `${url.origin}/llms.txt`;
+  const res = await fetch(fileUrl);
+  const fileContent = await res.text();
 
   return new Response(fileContent, {
     headers: {
