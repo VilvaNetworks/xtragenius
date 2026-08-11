@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import CompetitionBanner from "@/components/CompetitionBanner";
 import AbacusSection from "@/components/AbacusSection";
 import ProgramsSection from "@/components/ProgramsSection";
 import StatsSection from "@/components/StatsSection";
@@ -13,6 +14,7 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSection />
+        <CompetitionBanner />
         <AbacusSection />
         <ProgramsSection />
         <StatsSection />

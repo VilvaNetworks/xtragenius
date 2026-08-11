@@ -40,9 +40,9 @@ export default function OfflineHeroSection() {
               </p>
               <h2
                 className="font-sans font-bold leading-[1.17] text-[#3f3a64]"
-                style={{ fontSize: "40px", width: "100%", maxWidth: "500px" }}
+                style={{ fontSize: "40px", width: "100%", maxWidth: "520px" }}
               >
-                23<sup>rd</sup> <mark className="bg-transparent text-[#ff6600]">National Level</mark> ABACUS &amp; VEDIC MATHS Competition
+                25<sup>th</sup> <mark className="bg-transparent text-[#ff6600]">National Level</mark> Offline Abacus Competition
               </h2>
             </AnimateOnScroll>
 
@@ -51,12 +51,13 @@ export default function OfflineHeroSection() {
                 style={{
                   fontSize: "14px",
                   color: "rgb(255, 102, 0)",
-                  fontWeight: 600,
+                  fontWeight: 700,
                   marginTop: "16px",
                   marginBottom: "16px",
+                  letterSpacing: "1px",
                 }}
               >
-                – 29th December 2019
+                LIVE, IN-PERSON &middot; 11th OCTOBER 2026
               </p>
               <p
                 className="font-medium text-[#8c89a2]"
@@ -67,19 +68,44 @@ export default function OfflineHeroSection() {
                   maxWidth: "460px",
                 }}
               >
-                We proudly announce that, Our yearly prestigious Abacus Competition is about to begin to discover more talents.
+                Celebrating a 25-year legacy, open to all institutes. Win an iPad
+                for toppers, with trophies &amp; certificates for every participant.
+                Registrations close 20th September — limited spots!
               </p>
             </AnimateOnScroll>
 
             <AnimateOnScroll delay={300}>
               <div className="flex flex-col gap-3">
                 <p style={{ fontSize: "16px", fontWeight: 600, color: "#3F3A64" }}>
-                  WHERE?&nbsp;&nbsp;<span style={{ color: "rgb(255, 102, 0)" }}>Chennai</span>
+                  WHERE?&nbsp;&nbsp;<span style={{ color: "rgb(255, 102, 0)" }}>Annai Velankanni&apos;s School &amp; College, Chennai</span>
                 </p>
                 <p style={{ fontSize: "16px", fontWeight: 600, color: "#3F3A64" }}>
-                  WHEN?&nbsp;&nbsp;<span style={{ color: "rgb(255, 102, 0)" }}>May 2019</span>
+                  WHEN?&nbsp;&nbsp;<span style={{ color: "rgb(255, 102, 0)" }}>11th October 2026</span>
                 </p>
               </div>
+            </AnimateOnScroll>
+
+            <AnimateOnScroll delay={400}>
+              <a
+                href="https://wa.me/919840004162"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  backgroundColor: "rgb(255, 102, 0)",
+                  color: "white",
+                  borderRadius: "5px",
+                  padding: "14px 32px",
+                  fontSize: "14px",
+                  fontWeight: 600,
+                  display: "inline-block",
+                  textDecoration: "none",
+                  marginTop: "28px",
+                  transition: "opacity 0.2s",
+                }}
+                className="hover:opacity-90"
+              >
+                Register Now on WhatsApp: +91 98400 04162
+              </a>
             </AnimateOnScroll>
           </div>
 
@@ -87,12 +113,12 @@ export default function OfflineHeroSection() {
           <div className="relative flex flex-1 items-center justify-center max-md:order-1 max-md:flex-none max-md:w-full pt-[40px]" style={{ minHeight: "500px" }}>
             {/* Main image */}
             <AnimateOnScroll delay={200} className="relative z-[2] w-full">
-              <div className="relative overflow-hidden rounded-2xl w-full max-w-[500px] h-[350px] shadow-xl ml-auto mr-auto">
+              <div className="relative overflow-hidden rounded-2xl w-full max-w-[460px] aspect-square shadow-xl ml-auto mr-auto bg-[#0b1c3a]">
                 <Image
-                  src="/images/offline-competition/img1.jpeg"
-                  alt="Xtragenius National Competition Event"
+                  src="/images/offline-competition/ofline-com-img.jpeg"
+                  alt="Xtragenius 25th National Level Offline Abacus Competition poster"
                   fill
-                  className="object-cover"
+                  className="object-contain"
                   priority
                 />
               </div>

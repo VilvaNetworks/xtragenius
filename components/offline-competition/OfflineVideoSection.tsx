@@ -5,9 +5,9 @@ import { useState, useEffect } from "react";
 import AnimateOnScroll from "../AnimateOnScroll";
 
 const highlights = [
-  "Every year, Xtragenius hosts National Level Abacus & Mental Arithmetic Competition. We expect student participation of 3000+ students aged 5 to 13.",
-  "After the competition, Awards Distribution Ceremony will be held where over 1000 prizes are going to be given to the top students across each learning level.",
-  "The events will have direct live streaming on Facebook and YouTube. Results will be flashed in a big LCD screen in the hall and published on the website.",
+  "Our 25th National Level Offline Abacus Competition is back — live and in-person on 11th October 2026 at Annai Velankanni's School & College, Chennai.",
+  "A 25-year legacy, open to all institutes. Toppers win an iPad, and every participant receives a trophy or certificate.",
+  "Registrations close on 20th September — spots are limited, so register early on WhatsApp: +91 98400 04162.",
 ];
 
 export default function OfflineVideoSection() {
@@ -146,6 +146,29 @@ export default function OfflineVideoSection() {
                 </AnimateOnScroll>
               ))}
             </div>
+
+            <AnimateOnScroll delay={200 + highlights.length * 100}>
+              <a
+                href="https://wa.me/919840004162"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  backgroundColor: "rgb(255, 102, 0)",
+                  color: "white",
+                  borderRadius: "5px",
+                  padding: "14px 32px",
+                  fontSize: "14px",
+                  fontWeight: 600,
+                  display: "inline-block",
+                  textDecoration: "none",
+                  marginTop: "32px",
+                  transition: "opacity 0.2s",
+                }}
+                className="hover:opacity-90"
+              >
+                Register Now on WhatsApp
+              </a>
+            </AnimateOnScroll>
           </div>
 
         </div>

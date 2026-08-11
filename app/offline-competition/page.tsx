@@ -7,7 +7,9 @@ import OfflineVideoSection from "@/components/offline-competition/OfflineVideoSe
 import OfflineHighlightsSection from "@/components/offline-competition/OfflineHighlightsSection";
 
 export const metadata: Metadata = {
-  title: "Offline Competition - Learning made easy",
+  title: "25th National Level Offline Abacus Competition | Xtragenius",
+  description:
+    "Xtragenius' 25th National Level Offline Abacus Competition — live, in-person on 11th October 2026 at Annai Velankanni's School & College, Chennai. Open to all institutes. Registrations close 20th September.",
 };
 
 export default function OfflineCompetitionPage() {
@@ -26,15 +28,6 @@ export default function OfflineCompetitionPage() {
                 <span className="text-[#333333]">Offline Competition</span>
               </span>
             </nav>
-          </div>
-        </section>
-
-        {/* Page Title */}
-        <section className="bg-white pt-12 pb-6 text-center">
-          <div className="mx-auto max-w-[1200px] px-4">
-            <h1 className="text-[44px] font-bold text-[#333333]">
-              Offline Competition
-            </h1>
           </div>
         </section>
 
