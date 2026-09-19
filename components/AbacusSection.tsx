@@ -186,7 +186,7 @@ export default function AbacusSection() {
         <AnimateOnScroll delay={300}>
         <div style={{ textAlign: "center" }}>
           <Link
-            href="/courses"
+            href="/vedic-math"
             className="hover:opacity-90"
             style={{
               display: "inline-block",

@@ -7,7 +7,7 @@ import AnimateOnScroll from "../AnimateOnScroll";
 const highlights = [
   "Our 25th National Level Offline Abacus Competition is back — live and in-person on 11th October 2026 at Annai Velankanni's School & College, Chennai.",
   "A 25-year legacy, open to all institutes. Toppers win an iPad, and every participant receives a trophy or certificate.",
-  "Registrations close on 20th September — spots are limited, so register early on WhatsApp: +91 98400 04162.",
+  "Registrations close on 20th September — spots are limited, so register early on WhatsApp: +91 9840004162.",
 ];
 
 export default function OfflineVideoSection() {

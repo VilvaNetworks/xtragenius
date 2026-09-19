@@ -26,8 +26,9 @@ const advantageItems = [
   },
   {
     number: "03",
-    title: "Download",
-    description: "About Xtragenius maths courses and its benefits.",
+    title: "Proven Curriculum",
+    description:
+      "A structured, level-by-level curriculum across Abacus, Vedic Maths, Mind Dart and Handwriting, refined over years of classroom experience.",
   },
 ];
 

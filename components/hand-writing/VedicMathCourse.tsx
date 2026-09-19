@@ -48,7 +48,7 @@ export default function VedicMathCourse() {
           {/* Right Image */}
           <div className="flex-1 w-full">
             <AnimateOnScroll delay={300}>
-              <p>Abacus mental arithmetic training is a technique offered for kids to develop their mental capacity at their childhood. Moreover the mental arithmetic programs intends the kids to achieve the thorough development and activation of brain. Hence, it is a proven tool to improve the aptitude power of kids. During the training courses, kids learn to solve the problem visually. The abacus training makes the kids to execute complex tasks to achieve the correct solution without any difficulty.</p>
+              <p>Good handwriting is more than neat letters — it builds fine motor control, focus and confidence in young children. Our Hand Writing programme guides kids step by step from correct pencil grip and letter formation through to cursive writing, helping them write faster, neater and with less effort in the classroom.</p>
             </AnimateOnScroll>
           </div>
 

@@ -72,7 +72,7 @@ const aboutLinks = [
   { label: "Our Team", href: "/our-team/" },
   { label: "Our Culture", href: "/our-culture/" },
   { label: "Partner With Us", href: "/partner-with-us/" },
-  { label: "Become A Trainer", href: "/partner-with-us/" },
+  // { label: "Become A Trainer", href: "/partner-with-us/" },
 ];
 
 const programLinks = [

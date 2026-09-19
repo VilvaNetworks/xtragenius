@@ -212,7 +212,7 @@ export default function ContactUsPage() {
                     <h3 className="text-[17px] font-bold text-[#3F3A64] mb-3">Address</h3>
                     <p className="text-[14px] text-[#696969] leading-[1.8]">
                       Xtragenius Learning Systems,<br />
-                      No:9/60,Sowrashtra Nagar 10th cross st,<br />
+                      No:9/60,Sowrasthra Nagar 10th cross st,<br />
                       Choolaimedu, Chennai - 600 094.
                     </p>
                   </div>

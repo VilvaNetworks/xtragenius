@@ -165,10 +165,12 @@ export default function OnlineOpenCompetition() {
               For Registration :
             </p>
             <a
-              href="tel:+919940633579"
+              href="https://wa.me/919840004162"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-md bg-[#ff6600] px-10 py-4 text-lg font-bold text-white transition-transform hover:-translate-y-1 hover:shadow-xl shadow-md"
             >
-              +91 9940633579
+              WhatsApp: +91 98400 04162
             </a>
           </AnimateOnScroll>
         </div>

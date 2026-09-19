@@ -29,8 +29,6 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
               <span className="mx-2">/</span>
               <a href="/courses" className="hover:text-[#ff6600] transition-colors">Courses</a>
               <span className="mx-2">/</span>
-              <span>Finance</span>
-              <span className="mx-2">/</span>
               <span>{course.title}</span>
             </span>
           </nav>

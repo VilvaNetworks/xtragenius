@@ -7,9 +7,14 @@ import Footer from "@/components/Footer";
 
 const faqItems = [
   {
-    question: "How many levels or terms are there for completion of course?",
+    question: "What programmes does Xtragenius offer?",
     answer:
-      "There are 8 levels, level 1 to 8, each level span to three months ( one term)",
+      "We offer four programmes for children: Abacus (mental arithmetic), Vedic Maths (fast calculation techniques), Mind Dart (memory and visualization training), and Hand Writing (handwriting improvement). Each follows its own structured, level-by-level curriculum.",
+  },
+  {
+    question: "How many levels or terms are there for completion of a course?",
+    answer:
+      "There are 8 levels, level 1 to 8, each level spans three months (one term).",
   },
   {
     question:
@@ -17,14 +22,39 @@ const faqItems = [
     answer: "The classes are of 2 hours duration in a week.",
   },
   {
+    question: "What age group are these programmes suitable for?",
+    answer:
+      "Our programmes are designed for children aged 5 to 14. A trainer can help you determine the right starting level for your child's age and ability.",
+  },
+  {
+    question: "Are classes conducted online or offline?",
+    answer:
+      "Both. We run classes offline through our franchise network of physical learning centres, as well as online for students who prefer to learn from home.",
+  },
+  {
     question: "Whether any certificate is issued after completion of a level?",
     answer:
       "Yes; On completion of each level and on conducting an examination, a course completion certificate is issued when a child gets a minimum of 70% marks. The children can go to the next level only after completion of the previous level.",
   },
   {
+    question: "Is a trial class available before enrolling?",
+    answer:
+      "Trial class availability can vary by centre. Please contact us or your nearest Xtragenius centre to check availability in your area.",
+  },
+  {
+    question: "How can my child take part in an Xtragenius competition?",
+    answer:
+      "We run both a National Level Offline Competition and an online competition open to students at every level. Registration details and deadlines are posted on the respective competition pages, and you can register directly via WhatsApp.",
+  },
+  {
     question: "How a Franchisee is appointed?",
     answer:
-      "A Franchisee is appointed on eligible terms and conditions an executing a Franchise Agreement for an initial period of 3 years on payment of prescribed fee. The Franchisee, after signing the Franchise Agreement, becomes the licensed / authorised to conduct the business of Xtragenius Abacus and Mental Arithmetic Education for younger children of age group 5 to 14 years. The Franchisee can operate up to a maximum distance of 2 to 2.5 km radius.",
+      "A Franchisee is appointed on eligible terms and conditions on executing a Franchise Agreement for an initial period of 3 years on payment of a prescribed fee. The Franchisee, after signing the Franchise Agreement, becomes licensed/authorised to conduct the business of Xtragenius Abacus and Mental Arithmetic Education for children aged 5 to 14. The Franchisee can operate up to a maximum distance of 2 to 2.5 km radius.",
+  },
+  {
+    question: "What does it cost to become a franchise partner?",
+    answer:
+      "Franchise fees and investment details vary and are shared directly with interested applicants. Visit our Partner With Us page or contact us to get the current terms for your location.",
   },
 ];
 

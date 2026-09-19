@@ -33,6 +33,9 @@ export default function RankPage() {
             <h1 className="text-[44px] font-bold text-[#333333]">
               Rank
             </h1>
+            <p className="text-[15px] text-[#696969] mt-2">
+              Toppers from our 24th National Level Offline Abacus &amp; Vedic Maths Competition
+            </p>
           </div>
         </section>
 

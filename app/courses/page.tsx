@@ -20,7 +20,7 @@ export default function CoursesPage() {
           </nav>
           <div className="text-center mt-12 mb-8">
             <h1 className="text-4xl md:text-5xl font-bold text-[#333333]">
-              Archives: Courses
+              Our Courses
             </h1>
           </div>
         </div>

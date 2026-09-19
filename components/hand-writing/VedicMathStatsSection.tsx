@@ -11,10 +11,10 @@ interface StatItem {
 }
 
 const stats: StatItem[] = [
-  { number: 39, suffix: "", label: "Professional\nCourses", highlight: true },
+  { number: 10, suffix: "", label: "Professional\nCourses", highlight: true },
   { number: 16, suffix: "k+", label: "Enrolled\nLearners" },
-  { number: 209, suffix: "", label: "Professional\nCourses" },
-  { number: 100, suffix: "%", label: "Satisfaction\nRate" },
+  { number: 500, suffix: "", label: "Franchises" },
+  { number: 10, suffix: "+", label: "Countries" },
 ];
 
 function AnimatedCounter({ end, duration = 2000 }: { end: number; duration?: number }) {

@@ -48,8 +48,8 @@ const learningSteps = [
   },
   {
     number: "03",
-    title: "Download",
-    description: "About Xtragenius maths courses and its benefits.",
+    title: "Trained Educators",
+    description: "Every Xtragenius teacher is trained on our curriculum, so every child gets the same standard of teaching.",
   },
 ];
 

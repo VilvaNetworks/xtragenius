@@ -43,8 +43,7 @@ export default function ProductInfo({ product }: { product: Product }) {
       </h1>
       
       <div className="text-[18px]">
-        <span className="text-[#666666]">Free! </span>
-        <del className="text-[#cccccc]">₹{product.originalPrice}</del>
+        <span className="text-[#666666]">Price on enquiry</span>
       </div>
 
       {/* Pincode Checker */}

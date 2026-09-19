@@ -38,65 +38,34 @@ export default function CourseTabs({ course }: { course: Course }) {
               : "absolute top-0 left-0 opacity-0 translate-y-8 pointer-events-none"
           }`}
         >
-          {course.slug === "abacus" ? (
+          <>
+            <h2 className="text-2xl font-bold text-[#3F3A64] mb-6">Course Description</h2>
             <div className="text-gray-600 space-y-6 leading-relaxed">
+              <p>
+                {course.description || "This programme is part of Xtragenius' structured curriculum for children, designed to build lasting cognitive and academic skills through hands-on, level-by-level training."}
+              </p>
+            </div>
+
+            <div className="mt-8 text-gray-600 space-y-6 leading-relaxed">
               <h3 className="text-xl font-bold text-[#3F3A64] mb-2">Meaningful Learning</h3>
               <p>We set goals for your children to give them a sense of purpose and focus on a particular direction.</p>
-              
+
               <h3 className="text-xl font-bold text-[#3F3A64] mb-2">Quality Teaching</h3>
-              <p>We have a team of expert teachers that they deliver quality teaching for every student.</p>
-              
+              <p>We have a team of expert teachers who deliver quality teaching for every student.</p>
+
               <h3 className="text-xl font-bold text-[#3F3A64] mb-2">One on one support</h3>
               <p>We provide one on one support with our Xtragenius teachers for a personalized experience.</p>
-              
+
               <h3 className="text-xl font-bold text-[#3F3A64] mb-2">Expert guidance</h3>
-              <p>We provide the support of influential student's minds in education to shape your child's life better.</p>
-              
-              <div className="mt-8 flex justify-center lg:justify-start">
-                <Image src="/images/courses/img2.jpg" alt="Abacus Event" width={400} height={250} className="rounded-lg object-cover" />
-              </div>
-            </div>
-          ) : (
-            <>
-              <h2 className="text-2xl font-bold text-[#3F3A64] mb-6">Course Description</h2>
-              <div className="text-gray-600 space-y-6 leading-relaxed">
-                <p>
-                  {course.description || "This course has the ambition to build a bridge between a century of science and 21st-century managers. A bridge between how our brain works and how to use that knowledge to improve our communication and leadership abilities."}
-                </p>
-                <p>
-                  To understand how and why Leadership works, we first need to understand what triggers us. We'll be diving deep into our subconscious motivational processes. We'll have a look at our brain, call it our 'hardware' and the subconscious programs running in it, that's basically our software.
-                </p>
-                <p>
-                  So expect tools, concrete, and simple tools that you will be able to use right away with your team and colleagues. In the end, the aim of this course is to open the way for a new understanding of motivation and communication, towards a new, highly effective and sustainable model for leadership in this 21st century.
-                </p>
-              </div>
-              
-              <div className="mt-10 relative w-full aspect-video rounded-xl overflow-hidden shadow-lg">
-                <Image
-                  src="/images/courses/img1.jpg" // Using placeholder image for video thumb
-                  alt="Course Video"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                  <button className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                  </button>
+              <p>We provide the support of experienced educators to shape your child&apos;s learning journey.</p>
+
+              {course.image && (
+                <div className="mt-8 flex justify-center lg:justify-start">
+                  <Image src={course.image} alt={course.title} width={400} height={250} className="rounded-lg object-cover" />
                 </div>
-              </div>
-              
-              <div className="mt-10 text-gray-600 space-y-6 leading-relaxed">
-                <p>I will provide a framework based on the latest insights in cognitive psychology and related fields. Within this framework, I will present your studies, research, and experiments on human behavior and I will show you how they apply to leadership and team management.</p>
-                <p>Who this course is for:</p>
-                <ul className="list-disc pl-5 space-y-2">
-                    <li>Managers in charge of a team</li>
-                    <li>Managers looking for tools and insights to manage their team</li>
-                    <li>Professionals who want to improve their people skills</li>
-                    <li>Professionals who want to learn more about human behavior</li>
-                </ul>
-              </div>
-            </>
-          )}
+              )}
+            </div>
+          </>
         </div>
 
         {/* Curriculum Tab */}

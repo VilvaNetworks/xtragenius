@@ -104,7 +104,7 @@ export default function OfflineHeroSection() {
                 }}
                 className="hover:opacity-90"
               >
-                Register Now on WhatsApp: +91 98400 04162
+                Register Now on WhatsApp: +91 9840004162
               </a>
             </AnimateOnScroll>
           </div>

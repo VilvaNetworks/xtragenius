@@ -125,7 +125,7 @@ export default function VideoSection() {
               Enjoy Our <span className="text-[#ff6600]">Course</span>
             </h2>
             <p className="text-[16px] text-[#696969] leading-[1.8] max-w-[480px]">
-              Get a Sneek to peek into the xtragenius Abacus course to know
+              Get a sneak peek into the xtragenius Abacus course to know
               what it has in store for you. Encourage your child to be
               remarkable and future-ready with us.
             </p>

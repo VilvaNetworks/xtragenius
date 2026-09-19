@@ -31,7 +31,7 @@ export default function PartnerWithUs() {
           <div className="w-full md:w-1/2">
               <img
                 src="/images/partner-with-us.jpg"
-                alt="Join as a Xtragenius Online Business Partner"
+                alt="Join as a Xtragenius Franchise Partner"
                 className="w-full h-auto"
               />
           </div>

@@ -80,8 +80,7 @@ export default function ProductCard({ product }: { product: Product }) {
           </h2>
         </Link>
         <div className="text-[#666666] text-[14px]">
-          <span>Free! </span>
-          <del className="text-gray-400">₹{product.originalPrice}</del>
+          <span>Price on enquiry</span>
         </div>
       </div>
     </div>

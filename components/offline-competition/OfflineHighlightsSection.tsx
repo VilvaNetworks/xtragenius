@@ -96,8 +96,8 @@ export default function OfflineHighlightsSection() {
               marginBottom: "12px",
             }}
           >
-            Subscribe {" "}
-            <span className="text-[#ff6600] font-[400]">XTRAGENIUS</span>
+            Ready to compete with {" "}
+            <span className="text-[#ff6600] font-[400]">XTRAGENIUS</span>?
           </h3>
         </AnimateOnScroll>
 
@@ -112,9 +112,31 @@ export default function OfflineHighlightsSection() {
               margin: "0 auto 32px",
             }}
           >
-            Enter your email address to register to our newsletter subscription
-            delivered on a regular basis!
+            Registrations close Soon — message us on WhatsApp to
+            secure your child&apos;s spot.
           </h2>
+        </AnimateOnScroll>
+
+        <AnimateOnScroll delay={300}>
+          <a
+            href="https://wa.me/919840004162"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              backgroundColor: "rgb(255, 102, 0)",
+              color: "white",
+              borderRadius: "5px",
+              padding: "14px 32px",
+              fontSize: "14px",
+              fontWeight: 600,
+              display: "inline-block",
+              textDecoration: "none",
+              transition: "opacity 0.2s",
+            }}
+            className="hover:opacity-90"
+          >
+            Register Now on WhatsApp
+          </a>
         </AnimateOnScroll>
 
 

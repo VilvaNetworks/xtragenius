@@ -3,10 +3,10 @@
 import AnimateOnScroll from "../AnimateOnScroll";
 
 const stats = [
-  { value: "39", label: "Professional\nCourses" },
+  { value: "10", label: "Professional\nCourses" },
   { value: "16k+", label: "Enrolled\nLearners" },
-  { value: "209", label: "Professional\nCourses" },
-  { value: "100%", label: "Satisfaction\nRate" },
+  { value: "500", label: "Franchises" },
+  { value: "10+", label: "Countries" },
 ];
 
 export default function OnlineSeatsSection() {

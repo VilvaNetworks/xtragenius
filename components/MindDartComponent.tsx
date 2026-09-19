@@ -166,7 +166,7 @@ export default function MindDartComponent() {
 
             <AnimateOnScroll delay={0} className="text-center">
               <div className="text-[52px] font-bold text-[#ff6600] leading-none mb-3">
-                <AnimatedCounter end={39} />
+                <AnimatedCounter end={10} />
               </div>
               <div className="text-[15px] font-bold text-white tracking-[0.5px]">Professional<br />Courses</div>
             </AnimateOnScroll>
@@ -180,16 +180,16 @@ export default function MindDartComponent() {
 
             <AnimateOnScroll delay={200} className="text-center">
               <div className="text-[52px] font-bold text-[#ff6600] leading-none mb-3">
-                <AnimatedCounter end={209} />
+                <AnimatedCounter end={500} />
               </div>
-              <div className="text-[15px] font-bold text-white tracking-[0.5px]">Professional<br />Courses</div>
+              <div className="text-[15px] font-bold text-white tracking-[0.5px]">Franchises</div>
             </AnimateOnScroll>
 
             <AnimateOnScroll delay={300} className="text-center">
               <div className="text-[52px] font-bold text-[#ff6600] leading-none mb-3">
-                <AnimatedCounter end={100} />%
+                <AnimatedCounter end={10} />+
               </div>
-              <div className="text-[15px] font-bold text-white tracking-[0.5px]">Satisfaction<br />Rate</div>
+              <div className="text-[15px] font-bold text-white tracking-[0.5px]">Countries</div>
             </AnimateOnScroll>
 
           </div>
@@ -287,7 +287,7 @@ export default function MindDartComponent() {
                   Enjoy Our <span className="text-[#ff6600] font-normal">Course</span>
                 </h2>
                 <p className="text-[16px] text-[#696969] leading-[1.8] mb-4">
-                  Get a Sneek to peek into the xtragenius Mind dart course to know
+                  Get a sneak peek into the xtragenius Mind Dart course to know
                   what it has in store for you.
                 </p>
                 <p className="text-[16px] text-[#696969] leading-[1.8]">

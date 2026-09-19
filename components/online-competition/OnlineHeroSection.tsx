@@ -35,7 +35,7 @@ export default function OnlineHeroSection() {
           <div className="relative w-full md:aspect-square overflow-hidden mx-auto">
             <Image
               src="/images/online-competition/img1.png"
-              alt="Global Abacus Wiz 2025 Poster"
+              alt="Xtragenius Global Abacus Wiz Poster"
               fill
               className="object-contain"
               priority
@@ -48,13 +48,13 @@ export default function OnlineHeroSection() {
       <div className="mx-auto max-w-[1200px] px-4 text-center mb-20">
         <AnimateOnScroll delay={200}>
           <p className="text-[13px] font-semibold text-[#ff6600] uppercase tracking-[1px] mb-2">
-            August 17th 2025
+            Past Edition &middot; 17th August 2025
           </p>
           <h2 className="text-[28px] md:text-[36px] font-bold text-[#3F3A64] mb-2">
-            XTRAGENIUS GLOBAL ABACUS OLYMPIAD-2025
+            XTRAGENIUS GLOBAL ABACUS WIZ
           </h2>
           <p className="text-[14px] font-semibold text-gray-500">
-            Date: 17-08-2025
+            A new edition is announced periodically — register your interest below to be notified.
           </p>
         </AnimateOnScroll>
       </div>
