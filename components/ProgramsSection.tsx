@@ -26,7 +26,7 @@ const cards: CardItem[] = [
     href: "/offline-competition",
   },
   {
-    image: "/images/online-competition/img1.png",
+    image: "/images/online-competition/global-abacus-wiz.jpg",
     alt: "Online Competition",
     title: "Online Competition",
     cta: "Learn More",

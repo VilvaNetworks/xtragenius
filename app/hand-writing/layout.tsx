@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Vedic Math - Learning made easy",
+  title: "Hand Writing - Learning made easy",
 };
 
-export default function VedicMathLayout({
+export default function HandWritingLayout({
   children,
 }: {
   children: React.ReactNode;

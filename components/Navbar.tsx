@@ -61,7 +61,7 @@ const navItems: NavItem[] = [
   {
     label: 'Programs',
     dropdown: [
-      { label: 'Home', href: '/' },
+      // { label: 'Home', href: '/' },
       { label: 'Vedic Math', href: '/vedic-math/' },
       { label: 'Mind Dart', href: '/mind-dart/' },
       { label: 'Hand Writing', href: '/hand-writing/' },

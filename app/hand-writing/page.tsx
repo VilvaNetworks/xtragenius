@@ -90,26 +90,6 @@ export default function VedicMathPage() {
                   </p>
                 </AnimateOnScroll>
 
-                <AnimateOnScroll delay={300}>
-                  <button className="bg-[#ff6600] hover:bg-[#e65c00] text-white font-medium py-3 px-8 rounded-md flex items-center justify-center gap-3 transition-colors shadow-sm">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                      <polyline points="7 10 12 15 17 10" />
-                      <line x1="12" y1="15" x2="12" y2="3" />
-                    </svg>
-                    Download free guide
-                  </button>
-                </AnimateOnScroll>
               </div>
 
               {/* Right column – Hero image with decorations */}
@@ -215,7 +195,11 @@ export default function VedicMathPage() {
 
 
         {/* Video Section */}
-        <VedicMathVideo />
+        <VedicMathVideo
+          courseName="Hand Writing"
+          image="/images/handwriting/hero.jpg"
+          imageAlt="Hand Writing course video thumbnail"
+        />
         <CTASection />
 
       </main>

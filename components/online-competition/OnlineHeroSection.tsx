@@ -32,12 +32,12 @@ export default function OnlineHeroSection() {
       {/* Hero Poster */}
       <div className="mx-auto max-w-[800px] px-4 mb-20">
         <AnimateOnScroll delay={100}>
-          <div className="relative w-full md:aspect-square overflow-hidden mx-auto">
+          <div className="relative w-full md:aspect-square overflow-hidden mx-auto rounded-2xl shadow-xl">
             <Image
-              src="/images/online-competition/img1.png"
-              alt="Xtragenius Global Abacus Wiz Poster"
+              src="/images/online-competition/global-abacus-wiz.jpg"
+              alt="Student practicing on the abacus for the Xtragenius Global Abacus Wiz competition"
               fill
-              className="object-contain"
+              className="object-cover"
               priority
             />
           </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import AnimateOnScroll from "../AnimateOnScroll";
 
 export default function VedicMathCourse() {
@@ -60,9 +61,9 @@ export default function VedicMathCourse() {
       </div>
       <div className="mt-16 flex justify-center">
         <AnimateOnScroll delay={400}>
-          <button className="bg-[#ff6600] hover:bg-[#e65c00] text-white font-medium py-3 px-8 rounded-md flex items-center justify-center gap-2 transition-colors shadow-sm">
+          <Link href="/vedic-math" className="bg-[#ff6600] hover:bg-[#e65c00] text-white font-medium py-3 px-8 rounded-md flex items-center justify-center gap-2 transition-colors shadow-sm">
             View all courses <span>→</span>
-          </button>
+          </Link>
         </AnimateOnScroll>
       </div>
     </section>

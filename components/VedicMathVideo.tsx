@@ -4,7 +4,17 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import AnimateOnScroll from "./AnimateOnScroll";
 
-export default function VedicMathVideo() {
+interface VedicMathVideoProps {
+  courseName?: string;
+  image?: string;
+  imageAlt?: string;
+}
+
+export default function VedicMathVideo({
+  courseName = "Vedic Maths",
+  image = "/images/vedic-math/videoimg.jpg",
+  imageAlt = "Vedic Maths course video thumbnail",
+}: VedicMathVideoProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
@@ -86,8 +96,8 @@ export default function VedicMathVideo() {
                 {!isPlaying ? (
                   <>
                     <Image
-                      src="/images/vedic-math/videoimg.jpg"
-                      alt="Vedic Maths course video thumbnail"
+                      src={image}
+                      alt={imageAlt}
                       fill
                       className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                     />
@@ -125,7 +135,7 @@ export default function VedicMathVideo() {
                 Enjoy Our <span className="text-[#ff6600]">Course</span>
               </h2>
               <p className="text-[16px] text-[#696969] leading-[1.8] max-w-[480px]">
-                Get a Sneek to peek into the xtragenius Vedic Maths course to know
+                Get a sneak peek into the xtragenius {courseName} course to know
                 what it has in store for you. Encourage your child to be
                 remarkable and future-ready with us.
               </p>
