@@ -24,25 +24,6 @@ function FacebookIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-function TwitterIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-    </svg>
-  );
-}
-
 function InstagramIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -95,19 +76,19 @@ const aboutLinks = [
 ];
 
 const programLinks = [
-  { label: "Abacus", href: "/courses/abacus/" },
+  // { label: "Abacus", href: "/courses/abacus/" },
   { label: "Vedic Math", href: "/vedic-math/" },
   { label: "Mind Draft", href: "/mind-dart/" },
   { label: "Hand Writing", href: "/hand-writing/" },
-  { label: "Short Courses", href: "/courses/" },
-  { label: "Online Learning Portal", href: "http://portal.xtragenius.com/" },
+  // { label: "Short Courses", href: "/courses/" },
+  // { label: "Online Learning Portal", href: "http://student.xtragenius.com/" },
   { label: "FAQs", href: "/faqs/" },
 ];
 
 const moreInfoLinks = [
   { label: "Terms & Conditions", href: "/terms-conditions/" },
   { label: "Privacy Policy", href: "/privacy-policy/" },
-  { label: "Refund & Cancellation", href: "/refund-cancellation/" },
+  // { label: "Refund & Cancellation", href: "/refund-cancellation/" },
 ];
 
 const headingStyle: CSSProperties = {
@@ -219,7 +200,9 @@ export default function Footer() {
               }}
             >
               <Link
-                href="#"
+                href="https://www.facebook.com/learning.xtragenius/"
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{ transition: "color 0.2s" }}
                 className="text-[#696969] hover:text-[#ff6600]"
                 aria-label="Facebook"
@@ -227,15 +210,9 @@ export default function Footer() {
                 <FacebookIcon />
               </Link>
               <Link
-                href="#"
-                style={{ transition: "color 0.2s" }}
-                className="text-[#696969] hover:text-[#ff6600]"
-                aria-label="Twitter"
-              >
-                <TwitterIcon />
-              </Link>
-              <Link
-                href="#"
+                href="https://www.instagram.com/xtragenius_abacus/"
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{ transition: "color 0.2s" }}
                 className="text-[#696969] hover:text-[#ff6600]"
                 aria-label="Instagram"
@@ -243,7 +220,9 @@ export default function Footer() {
                 <InstagramIcon />
               </Link>
               <Link
-                href="#"
+                href="https://in.linkedin.com/company/learning-xtragenius"
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{ transition: "color 0.2s" }}
                 className="text-[#696969] hover:text-[#ff6600]"
                 aria-label="LinkedIn"

@@ -33,13 +33,20 @@ type DropdownItem = {
   label: string
   href: string
   dropdown?: DropdownItem[]
+  hidden?: boolean
 }
 
 type NavItem = {
   label: string
   href?: string
   dropdown?: DropdownItem[]
+  hidden?: boolean
 }
+
+// Temporarily hidden from the header/sidebar nav — kept here (not deleted) so
+// they're one flag-flip away from coming back.
+const SHOW_CART_ICON = false
+const SHOW_ACCOUNT_ICON = false
 
 const navItems: NavItem[] = [
   { label: 'Home', href: '/' },
@@ -58,8 +65,8 @@ const navItems: NavItem[] = [
       { label: 'Vedic Math', href: '/vedic-math/' },
       { label: 'Mind Dart', href: '/mind-dart/' },
       { label: 'Hand Writing', href: '/hand-writing/' },
-      { label: 'Short Courses', href: '/courses/' },
-      { label: 'Online Learning Portal', href: 'http://portal.xtragenius.com/' },
+      { label: 'Short Courses', href: '/courses/', hidden: true },
+      { label: 'Online Learning Portal', href: 'http://student.xtragenius.com/', hidden: true },
     ],
   },
   {
@@ -67,12 +74,13 @@ const navItems: NavItem[] = [
     dropdown: [
       { label: 'Offline Competition', href: '/offline-competition/' },
       { label: 'Online Competition', href: '/online-competition/' },
-      { label: 'Rank', href: '/rank/' },
+      { label: 'Rank', href: '/rank/', hidden: true },
       { label: 'Portal Login', href: 'https://student.xtragenius.com/login' },
     ],
   },
   {
     label: 'Shop',
+    hidden: true,
     dropdown: [
       {
         label: 'Books',
@@ -178,7 +186,7 @@ export default function Navbar() {
             {/* Desktop Nav */}
             <nav className="hidden lg:flex">
               <ul className="m-0 flex list-none p-0">
-                {navItems.map((item) => (
+                {navItems.filter((item) => !item.hidden).map((item) => (
                   <li key={item.label} className="group relative">
                     {item.href && !item.dropdown ? (
                       <Link
@@ -229,7 +237,7 @@ export default function Navbar() {
                             )}
                           >
                             <ul className="m-0 list-none py-2 px-0">
-                              {item.dropdown.map((sub, index) => {
+                              {item.dropdown.filter((sub) => !sub.hidden).map((sub, index) => {
                                 const isExternal = sub.href.startsWith('http');
                                 return (
                                   <li key={sub.label} className="relative group/sub">
@@ -286,6 +294,7 @@ export default function Navbar() {
             {/* Header Actions */}
             <div className="flex items-center gap-4">
               {/* Cart */}
+              {SHOW_CART_ICON && (
               <div className="relative group/cart flex items-center h-full">
                 <Link
                   href="/cart/"
@@ -309,15 +318,18 @@ export default function Navbar() {
                   </Link>
                 </div>
               </div>
+              )}
 
               {/* Account */}
+              {SHOW_ACCOUNT_ICON && (
               <Link
-                href="https://xtragenius.com/wp-login.php"
+                href="https://student.xtragenius.com/register"
                 className="text-gray-700 transition-colors hover:text-[#ff6600]"
                 aria-label="My account"
               >
                 <UserIcon size={20} />
               </Link>
+              )}
 
               {/* CTA Button */}
               <Link
@@ -390,7 +402,7 @@ export default function Navbar() {
         <div className="flex-1 overflow-y-auto px-6 py-6 select-none">
           <nav className="flex flex-col">
             <ul className="m-0 list-none p-0 flex flex-col gap-1">
-              {navItems.map((item) => {
+              {navItems.filter((item) => !item.hidden).map((item) => {
                 const hasDropdown = !!item.dropdown;
                 const isExpanded = openDropdowns[item.label];
 
@@ -431,7 +443,7 @@ export default function Navbar() {
                           )}
                         >
                           <ul className="m-0 list-none pl-4 pr-2 py-1 flex flex-col gap-1.5 border-l border-white/20">
-                            {item.dropdown?.map((sub) => {
+                            {item.dropdown?.filter((sub) => !sub.hidden).map((sub) => {
                               const isSubDropdown = !!sub.dropdown;
                               const isSubExpanded = openDropdowns[`${item.label}-${sub.label}`];
 

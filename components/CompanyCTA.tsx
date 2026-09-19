@@ -117,7 +117,9 @@ export default function CompanyCTA() {
 
                 <AnimateOnScroll delay={400}>
                     <Link
-                        href="#"
+                        href="https://student.xtragenius.com/register"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         style={{
                             backgroundColor: "rgb(255, 102, 0)",
                             color: "white",

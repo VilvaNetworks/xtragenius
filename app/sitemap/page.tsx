@@ -29,8 +29,8 @@ const sitemapGroups = [
       { label: "Vedic Mathematics", href: "/vedic-math/" },
       { label: "Mind Dart Memory Program", href: "/mind-dart/" },
       { label: "Handwriting Improvement", href: "/hand-writing/" },
-      { label: "Short Courses Archive", href: "/courses/" },
-      { label: "Online Learning Portal", href: "http://portal.xtragenius.com/" },
+      // { label: "Short Courses Archive", href: "/courses/" },
+      // { label: "Online Learning Portal", href: "http://student.xtragenius.com/" },
     ],
   },
   {
@@ -38,7 +38,7 @@ const sitemapGroups = [
     links: [
       { label: "Offline National Competition", href: "/offline-competition/" },
       { label: "Online Global Competition", href: "/online-competition/" },
-      { label: "Competition Leaderboard / Rank", href: "/rank/" },
+      // { label: "Competition Leaderboard / Rank", href: "/rank/" },
       { label: "Student Portal Login", href: "https://student.xtragenius.com/login" },
     ],
   },
@@ -49,7 +49,7 @@ const sitemapGroups = [
       { label: "Frequently Asked Questions", href: "/faqs/" },
       { label: "Terms & Conditions", href: "/terms-conditions/" },
       { label: "Privacy Policy", href: "/privacy-policy/" },
-      { label: "Refund & Cancellation Policy", href: "/refund-cancellation/" },
+      // { label: "Refund & Cancellation Policy", href: "/refund-cancellation/" },
     ],
   },
 ];

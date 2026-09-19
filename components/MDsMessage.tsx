@@ -57,7 +57,7 @@ export default function MDsMessage() {
             <AnimateOnScroll delay={100} className="w-full md:w-5/12">
               <div className="relative overflow-hidden rounded-[8px]">
                 <img
-                  src="https://xtragenius.com/wp-content/uploads/2022/05/IMG_7821.jpeg"
+                  src="/images/md-message.jpg"
                   alt="MD's Message"
                   className="w-full h-auto object-cover rounded-[8px]"
                 />
@@ -68,10 +68,10 @@ export default function MDsMessage() {
             <AnimateOnScroll delay={200} className="w-full md:w-7/12 pt-4">
               <div className="text-[#696969] space-y-6 text-[15px] leading-[1.8]">
                 <p>
-                  At Xtragenius, we put ourselves in learners&apos; shoes to understand what they want and need, to build handy options for their education and guide them to a better version of themselves. We do the hard work to pave the ways for innovative higher education with advanced delivery modalities.
+                  At Xtragenius, we put ourselves in every child&apos;s shoes to understand what they truly need to grow — and build a curriculum around that, rather than the other way around. Every abacus, Vedic Maths, Mind Dart and handwriting programme we run exists to help a child think faster, focus longer, and believe in what they&apos;re capable of.
                 </p>
                 <p>
-                  Thank you for taking the time to visit our website. If you are interested in helping the children of India significantly develop their mental potential, do read on. John F Kennedy once said &quot;Children are the most valuable resource in this world and the best hope for the future&quot; and we at SIP Academy truly believe that only if we empower our children would we have a better world tomorrow. By enriching and empowering young children with essential mental skills, we would be able to ensure that although &quot;we cannot build the future for our children, we can build our children for the future&quot;.
+                  Thank you for taking the time to visit our website. If you care about helping India&apos;s children unlock their mental potential, do read on. John F. Kennedy once said &quot;Children are the most valuable resource in this world and the best hope for the future,&quot; and at Xtragenius we hold the same belief — that empowering our children today is how we build a better tomorrow. As we like to say: we cannot build the future for our children, but we can build our children for the future.
                 </p>
               </div>
 
@@ -85,7 +85,7 @@ export default function MDsMessage() {
                     margin: 0,
                   }}
                 >
-                  I learned one thing about online <br/> education is that <mark className="bg-transparent text-[#ff6600] p-0 font-bold">highly</mark> <br/> <mark className="bg-transparent text-[#ff6600] p-0 font-bold">motivated individuals</mark> always <br/> find a way to tackle the <br/> challenge in the most creative <br/> and flexible way.
+                  What I&apos;ve learned watching thousands <br/> of children pass through our <mark className="bg-transparent text-[#ff6600] p-0 font-bold">programmes</mark> <br/> is that every child has a <mark className="bg-transparent text-[#ff6600] p-0 font-bold">genius</mark> <br/> waiting to be uncovered — our job <br/> is simply to give them the right <br/> tools, at the right time.
                 </h3>
               </div>
             </AnimateOnScroll>
@@ -105,24 +105,24 @@ export default function MDsMessage() {
                   <i className="fas fa-arrow-right"></i>
                 </div>
                 <h3 className="text-[17px] font-bold text-[#3F3A64] leading-[1.6] m-0">
-                  What are the reasons for learners to choose distant learning (e-learning) over the traditional method?
+                  Why do parents choose Xtragenius for their child&apos;s mental development?
                 </h3>
               </div>
-              
+
               {/* Answer */}
               <div className="w-full md:w-8/12 pl-8 md:pl-0">
                 <ul className="space-y-6">
                   <li className="flex gap-4 text-[#696969] text-[15px] leading-[1.7]">
                     <div className="text-[#ff6600] mt-1 shrink-0"><i className="fas fa-check"></i></div>
-                    <div><strong>FLEXIBILITY</strong> – Work, family, degree—it’s all possible.</div>
+                    <div><strong>STRUCTURED LEARNING</strong> – A level-by-level curriculum in Abacus, Vedic Maths, Mind Dart and Handwriting, with certification at every level.</div>
                   </li>
                   <li className="flex gap-4 text-[#696969] text-[15px] leading-[1.7]">
                     <div className="text-[#ff6600] mt-1 shrink-0"><i className="fas fa-check"></i></div>
-                    <div>Convenience – Study on your time schedule, no commute, stackable programs lead to certificates and degrees.</div>
+                    <div>Flexibility – Available both offline through our franchise network and online, so every child can learn in the way that suits them best.</div>
                   </li>
                   <li className="flex gap-4 text-[#696969] text-[15px] leading-[1.7]">
                     <div className="text-[#ff6600] mt-1 shrink-0"><i className="fas fa-check"></i></div>
-                    <div>Proven Modality – More than 5 million students take one or more distance education courses each year.</div>
+                    <div>Proven Results – Regular national and international competitions give every child a stage to test and showcase their progress.</div>
                   </li>
                 </ul>
               </div>
@@ -139,16 +139,16 @@ export default function MDsMessage() {
                   <i className="fas fa-arrow-right"></i>
                 </div>
                 <h3 className="text-[17px] font-bold text-[#3F3A64] leading-[1.6] m-0">
-                  What makes Xtragenius different from others? Is that the equipment or the tutor?
+                  What makes Xtragenius different from other abacus programmes?
                 </h3>
               </div>
-              
+
               {/* Answer */}
               <div className="w-full md:w-8/12 pl-8 md:pl-0">
                 <ul className="space-y-6">
                   <li className="flex gap-4 text-[#696969] text-[15px] leading-[1.7]">
                     <div className="text-[#ff6600] mt-1 shrink-0"><i className="fas fa-check"></i></div>
-                    <div>New Relationships and Networking Opportunities – Learn alongside students who offer diverse levels of experience and perspective. Students enroll from all corners of the world contributing to a rich classroom environment.</div>
+                    <div>A Community of Learners – Our students train alongside peers from franchise centres across the country and come together at our National Level Offline Competition every year, building confidence through shared achievement, not just classroom hours.</div>
                   </li>
                 </ul>
               </div>
@@ -165,24 +165,24 @@ export default function MDsMessage() {
                   <i className="fas fa-arrow-right"></i>
                 </div>
                 <h3 className="text-[17px] font-bold text-[#3F3A64] leading-[1.6] m-0">
-                  Which kind of opportunities is opened up to me when I take the lead?
+                  What opportunities open up for our franchise partners?
                 </h3>
               </div>
-              
+
               {/* Answer */}
               <div className="w-full md:w-8/12 pl-8 md:pl-0">
                 <ul className="space-y-6">
                   <li className="flex gap-4 text-[#696969] text-[15px] leading-[1.7]">
                     <div className="text-[#ff6600] mt-1 shrink-0"><i className="fas fa-check"></i></div>
-                    <div>Career Advancement and Entrepreneurial Opportunities – Advance your career with additional credentials or degrees.</div>
+                    <div>An Entrepreneurial Opportunity – Run your own Xtragenius learning centre with our proven curriculum, training and ongoing support behind you.</div>
                   </li>
                   <li className="flex gap-4 text-[#696969] text-[15px] leading-[1.7]">
                     <div className="text-[#ff6600] mt-1 shrink-0"><i className="fas fa-check"></i></div>
-                    <div>Quality of Instruction – University of Illinois faculty are among the most accomplished scholars in the world.</div>
+                    <div>Quality of Instruction – Every franchise trainer is certified on the same curriculum, so every child gets the same standard of teaching.</div>
                   </li>
                   <li className="flex gap-4 text-[#696969] text-[15px] leading-[1.7]">
                     <div className="text-[#ff6600] mt-1 shrink-0"><i className="fas fa-check"></i></div>
-                    <div>Academic Excellence – Online degree seekers earn the same degree as U of I campus-based degree seeking students.</div>
+                    <div>A Trusted Brand – Join a network built over decades of running national-level competitions and franchise centres across India.</div>
                   </li>
                 </ul>
               </div>

@@ -93,7 +93,7 @@ export default function VedicMathPage() {
 
                 <AnimateOnScroll delay={300}>
                   <Link
-                    href="#"
+                    href="/courses/"
                     className="flex items-center gap-1 font-semibold text-[#8c89a2] transition-colors duration-[250ms] hover:text-[#ff6600]"
                     style={{ fontSize: "15px" }}
                   >

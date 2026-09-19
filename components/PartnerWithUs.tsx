@@ -29,14 +29,10 @@ export default function PartnerWithUs() {
           
           {/* Left Column - Image */}
           <div className="w-full md:w-1/2">
-              <img 
-                src="/images/partner-with-us.jpg" 
-                alt="Join as a Xtragenius Online Business Partner" 
+              <img
+                src="/images/partner-with-us.jpg"
+                alt="Join as a Xtragenius Online Business Partner"
                 className="w-full h-auto"
-                onError={(e) => {
-                  // Fallback to online image if local doesn't exist
-                  (e.target as HTMLImageElement).src = "https://xtragenius.com/wp-content/uploads/2022/05/partner_enquiry.jpg";
-                }}
               />
           </div>
 

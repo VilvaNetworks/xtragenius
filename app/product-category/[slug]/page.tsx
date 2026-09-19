@@ -36,7 +36,7 @@ export default async function ProductCategoryPage({ params }: { params: Promise<
               <span className="text-[15px] text-[#696969] font-medium">
                 <Link href="/" className="transition-colors hover:text-[#ff6600]">Home</Link>
                 <span className="mx-2">/</span>
-                <Link href="/shop" className="transition-colors hover:text-[#ff6600]">Products</Link>
+                <Link href="/" className="transition-colors hover:text-[#ff6600]">Products</Link>
                 <span className="mx-2">/</span>
                 <span className="text-[#333333]">{categoryName}</span>
               </span>

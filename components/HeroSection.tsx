@@ -82,7 +82,7 @@ export default function HeroSection() {
               >
                 Wanna learn more?&nbsp;&nbsp;
                 <Link
-                  href="#"
+                  href="/courses/"
                   className="group/link relative inline-flex items-center gap-1 pb-[2px]"
                 >
                   <span className="absolute left-0 bottom-0 h-[1.5px] w-full bg-[#e6e6e6]"></span>

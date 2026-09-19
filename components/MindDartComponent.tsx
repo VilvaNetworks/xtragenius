@@ -104,12 +104,9 @@ export default function MindDartComponent() {
                   {/* Circular Image */}
                   <div className="relative aspect-square rounded-full overflow-hidden z-10 bg-black shadow-lg">
                     <img
-                      src="https://xtragenius.com/wp-content/uploads/elementor/thumbs/boys-with-glasses-write-books-think-classroom_11zon-scaled-pppvrdwzfh6933hr9xcswcd5gkp82v2en2rnzv23es.jpg"
-                      alt="Boy with glasses thinking"
+                      src="/images/mind-dart/boy-thinking.jpg"
+                      alt="Boy thinking"
                       className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src = "https://xtragenius.com/wp-content/uploads/elementor/thumbs/boys-with-glasses-write-books-think-classroom_11zon-scaled-pppvrdwzfh6933hr9xcswcd5gkp82v2en2rnzv23es.jpg";
-                      }}
                     />
                   </div>
                 </div>
@@ -236,16 +233,6 @@ export default function MindDartComponent() {
                 </div>
               </AnimateOnScroll>
 
-              {/* Plus dots bottom-right */}
-              <AnimateOnScroll delay={350} className="absolute -bottom-16 right-0 z-0 max-md:hidden">
-                <div
-                  className="transition-transform duration-200 ease-out"
-                  style={{ transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)` }}
-                >
-                  <img src="https://xtragenius.com/wp-content/uploads/2019/12/maxcoach-shape-07.png" alt="" className="w-32 h-32 object-contain opacity-80" />
-                </div>
-              </AnimateOnScroll>
-
               <AnimateOnScroll delay={0}>
                 <div
                   className="relative z-10 w-full aspect-[16/10] rounded-sm shadow-xl overflow-hidden group bg-black cursor-pointer"
@@ -254,12 +241,9 @@ export default function MindDartComponent() {
                   {!isPlaying ? (
                     <>
                       <img
-                        src="https://xtragenius.com/wp-content/uploads/2019/12/home-2-popup-video-poster.jpg"
+                        src="/images/mind-dart/video-poster.jpg"
                         alt="Mind Dart course video thumbnail"
                         className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = "https://xtragenius.com/wp-content/uploads/2019/12/home-2-popup-video-poster.jpg";
-                        }}
                       />
                       <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/30 transition-colors duration-300">
                         {/* Standard YouTube Play Button */}
@@ -406,7 +390,9 @@ export default function MindDartComponent() {
 
           <AnimateOnScroll delay={400}>
             <Link
-              href="#"
+              href="https://student.xtragenius.com/register"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 backgroundColor: "rgb(255, 102, 0)",
                 color: "white",
