@@ -21,7 +21,7 @@ export function CourseGrid({ filter }) {
         <div className="h-[213px] relative overflow-hidden bg-[#d8dbcd] max-[1100px]:h-[190px] max-[800px]:h-[190px] max-[520px]:h-[235px]">
           {c.image ? <img className="w-full h-full object-cover transition-transform duration-700 [filter:saturate(.65)] group-hover:scale-105" src={c.image} alt={c.alt} loading="lazy" /> : <div className={artBoxClass} aria-hidden="true"><span className={artSpanClass}>{c.symbol}</span></div>}
           <div className="absolute inset-0 [background:linear-gradient(0deg,#16283330,transparent_50%)]"></div>
-          <span className="absolute top-[14px] left-[14px] z-[1] bg-[#f7f7f0e8] py-[7px] px-[10px] text-[7px] tracking-[1px] max-[520px]:text-[8px] max-[520px]:p-[8px_11px]">{c.badge}</span>
+          <span className="absolute top-[14px] left-[14px] z-[1] bg-[#f7f7f0e8] text-[#192e4e] py-[7px] px-[10px] text-[7px] tracking-[1px] max-[520px]:text-[8px] max-[520px]:p-[8px_11px]">{c.badge}</span>
         </div>
         <div className="min-w-0 [padding:23px_22px_0] flex-1 flex flex-col max-[1100px]:p-[20px_18px_0] max-[800px]:p-[20px_18px_0] max-[520px]:p-[24px_22px_0]">
           <div className="flex justify-between text-[8px] tracking-[1px] text-[#8b9188] mb-[12px] max-[520px]:text-[9px]"><span>{c.age.toUpperCase()}</span><span>{c.provider.includes('Coming') ? 'COMING SOON' : 'GUIDED LEARNING'}</span></div>

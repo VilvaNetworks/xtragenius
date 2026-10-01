@@ -1,10 +1,10 @@
 import './globals.css';
 import './learning-lab.css';
-import localFont from 'next/font/local';
+import { Inter, Sora } from 'next/font/google';
 import ExtensionHydrationGuard from '../components/ExtensionHydrationGuard';
 
-const bodyFont = localFont({ src: '../public/fonts/font-0.woff2', variable: '--font-body', weight: '400 700', display: 'swap' });
-const displayFont = localFont({ src: '../public/fonts/font-1.woff2', variable: '--font-heading', weight: '400 800', display: 'swap' });
+const bodyFont = Inter({ subsets: ['latin'], variable: '--font-body', display: 'swap' });
+const displayFont = Sora({ subsets: ['latin'], variable: '--font-heading', display: 'swap' });
 
 export const metadata = {
   title: 'Xtragenius — The potential is already there.',
