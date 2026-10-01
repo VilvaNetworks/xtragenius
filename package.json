@@ -11,7 +11,9 @@
   },
   "description": "Xtragenius - cognitive learning, built with Next.js",
   "devDependencies": {
-    "@playwright/test": "^1.63.0"
+    "@playwright/test": "^1.63.0",
+    "@tailwindcss/postcss": "^4.3.3",
+    "tailwindcss": "^4.3.3"
   },
   "dependencies": {
     "next": "^16.3.6",
