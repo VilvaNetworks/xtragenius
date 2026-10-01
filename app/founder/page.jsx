@@ -1,4 +1,5 @@
 import '../globals.css';
+import Header from '../../components/Header';
 
 export const metadata = {
   title: 'Our Founder — Xtragenius',
@@ -8,16 +9,12 @@ export const metadata = {
 const SHELL = "px-[5.5%] max-[800px]:px-[6%] min-[1600px]:[padding-left:max(5.5%,calc((100vw_-_1420px)/2))] min-[1600px]:[padding-right:max(5.5%,calc((100vw_-_1420px)/2))]";
 const SPACE = "pt-[112px] pb-[100px] max-[800px]:pt-[75px] max-[800px]:pb-[65px] max-[520px]:pt-[61px] max-[520px]:pb-[54px]";
 const EYEBROW = "text-[10px] tracking-[1.65px] font-[550] block";
-const TEXT_LINK = "inline-flex items-center gap-[18px] text-[11px] font-[550] pb-[6px] border-b border-[#aab1b6] leading-[1.5] transition-colors duration-200 hover:text-[#b78338]";
 const BUTTON = "inline-flex items-center justify-between gap-[30px] bg-[#192e4e] text-white text-[12px] font-medium py-[19px] px-[24px] border border-[#192e4e] rounded-[4px] transition-[background,transform,box-shadow] duration-[250ms] hover:bg-[#2a456d] hover:-translate-y-[2px] hover:shadow-[0_7px_16px_#172d4c13]";
 const SECTION_HEADING_H2 = "[font-family:var(--display)] text-[clamp(34px,3.3vw,49px)] leading-[1.2] font-medium tracking-[-2px] max-[800px]:text-[39px] max-[520px]:text-[32px] max-[520px]:tracking-[-1.5px]";
 
 export default function FounderPage() {
   return <div>
-    <header className={`h-[103px] ${SHELL} flex items-center justify-between border-b border-[#dcded6] relative z-20 bg-[#f7f7f0] sticky top-0 max-[800px]:h-[85px] max-[520px]:h-[78px]`}>
-      <a className="inline-flex items-center gap-[10px]" href="/" aria-label="Xtragenius home"><img src="/images/logo.png" alt="Xtragenius — multiplying intelligence" className="h-[34px] w-auto block max-[800px]:h-[28px]" /></a>
-      <a className={TEXT_LINK} href="/">← Back to home</a>
-    </header>
+    <Header />
 
     <main>
       <section className={`${SHELL} pt-[70px] pb-[70px] text-center bg-[#192e4e] text-[#f7f3ea]`}>
@@ -29,7 +26,7 @@ export default function FounderPage() {
       </section>
 
       <section className={`${SHELL} ${SPACE} grid [grid-template-columns:.8fr_1.2fr] gap-[9%] items-start max-[900px]:[grid-template-columns:1fr] max-[900px]:gap-[34px]`}>
-        <div className="sticky top-[120px] rounded-[14px] overflow-hidden [aspect-ratio:3/4] max-[900px]:static max-[900px]:max-w-[320px] max-[900px]:mx-auto">
+        <div className="sticky top-[120px] rounded-[14px] overflow-hidden [aspect-ratio:1/1] max-w-[420px] max-[900px]:static max-[900px]:max-w-[320px] max-[900px]:mx-auto">
           <img src="/images/founder/chinnaraj.png" alt="Mr. Chinnaraj, Co-Founder of Xtragenius" className="w-full h-full object-cover block" />
         </div>
         <div>
@@ -60,7 +57,7 @@ export default function FounderPage() {
       <section className={`${SHELL} [padding-top:111px] [padding-bottom:108px] text-center border-t border-[rgba(32,49,75,.18)] bg-[#dba34b] text-[#20314b] max-[800px]:pt-[75px] max-[800px]:pb-[75px] max-[520px]:pt-[65px] max-[520px]:pb-[65px] max-[360px]:pt-[55px]`}>
         <span className="text-[8px] text-[#5a3f16] mb-[23px] block tracking-[1.65px] font-[550] max-[520px]:text-[6px] max-[520px]:tracking-[1px]">THE NEXT CHAPTER STARTS WITH CURIOSITY.</span>
         <h2 className="text-[54px] leading-[1.23] tracking-[-2.5px] relative inline-block max-[800px]:text-[43px] max-[520px]:text-[33px] max-[520px]:tracking-[-1.6px] max-[360px]:text-[28px]">See where that journey<br /><span className="text-[#6b5327]">leads your child.</span><span className="text-[#dba34b] text-[55px] absolute bottom-[3px] right-[-65px] max-[800px]:text-[40px] max-[800px]:right-[-48px] max-[520px]:text-[24px] max-[520px]:right-[-19px] max-[520px]:bottom-[5px] max-[360px]:text-[20px] max-[360px]:right-[-15px]">✳</span></h2>
-        <a className={`${BUTTON} flex max-w-[211px] [margin:29px_auto_0] max-[800px]:text-[10px] max-[800px]:max-w-[190px] max-[800px]:p-[17px_18px]`} href="/#programmes">Explore programmes <span className="text-[17px] leading-[1]">↗</span></a>
+        <a className={`${BUTTON} flex w-fit whitespace-nowrap [margin:29px_auto_0] max-[800px]:text-[10px] max-[800px]:p-[17px_18px]`} href="/#programmes">Explore programmes <span className="text-[17px] leading-[1]">↗</span></a>
       </section>
     </main>
 

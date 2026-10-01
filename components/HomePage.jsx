@@ -1,7 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
+import Header from './Header';
 import LearningLab from './LearningLab';
-import { CourseGrid, Announcements, DetailDialog } from './LearningUI';
+import { CourseGrid, Announcements, Testimonials, DetailDialog } from './LearningUI';
 import { skillDetails } from '../lib/content';
 
 const SHELL = "px-[5.5%] max-[800px]:px-[6%] min-[1600px]:[padding-left:max(5.5%,calc((100vw_-_1420px)/2))] min-[1600px]:[padding-right:max(5.5%,calc((100vw_-_1420px)/2))]";
@@ -16,7 +17,6 @@ export default function HomePage() {
   const [shape, setShape] = useState(0);
   const [motion, setMotion] = useState(true);
   const [filter, setFilter] = useState('all');
-  const [menuOpen, setMenuOpen] = useState(false);
   const [view, setView] = useState(null);
   const [openFaq, setOpenFaq] = useState(0);
   useEffect(() => {
@@ -24,9 +24,7 @@ export default function HomePage() {
     setMotion(!media.matches);
     const update = () => setMotion(!media.matches);
     media.addEventListener('change', update);
-    const onKey = e => { if(e.key === 'Escape') setMenuOpen(false); };
-    document.addEventListener('keydown', onKey);
-    return () => { media.removeEventListener('change', update); document.removeEventListener('keydown', onKey); };
+    return () => media.removeEventListener('change', update);
   }, []);
   useEffect(() => {
     const observer = new IntersectionObserver(entries => entries.forEach(entry => { if(entry.isIntersecting) { entry.target.setAttribute('data-revealed', 'true'); observer.unobserve(entry.target); } }), {threshold:.12});
@@ -43,8 +41,6 @@ export default function HomePage() {
     if(target.dataset.shape !== undefined) setShape(Number(target.dataset.shape));
     if(target.id === 'motion-toggle') setMotion(value=>!value);
     if(target.id === 'privacy-button') setView({type:'privacy'});
-    if(target.classList.contains('menu-toggle')) setMenuOpen(value=>!value);
-    if(target.closest('#navigation') && target.tagName === 'A') setMenuOpen(false);
     if(target.dataset.faq !== undefined){ const i=Number(target.dataset.faq); setOpenFaq(v=>v===i?-1:i); }
   }
   const faqs = [
@@ -66,23 +62,7 @@ export default function HomePage() {
     A legacy of learning. A new world of possibilities.
     <a className="text-[#ecc486] ml-[9px] max-[520px]:ml-0" href="#programmes">Now online <span className="ml-[8px]">↗</span></a>
   </div>
-  <header className={`h-[103px] ${SHELL} flex items-center justify-between border-b border-[#dcded6] relative z-20 bg-[#f7f7f0] sticky top-0 max-[800px]:h-[85px] max-[520px]:h-[78px]`}>
-    <a className="inline-flex items-center gap-[10px]" href="/" aria-label="Xtragenius home"><img src="/images/logo.png" alt="Xtragenius — multiplying intelligence" className="h-[34px] w-auto block max-[800px]:h-[28px]" /></a>
-    <nav aria-label="Main navigation" id="navigation" className={`flex gap-[33px] text-[12px] font-medium items-center max-[1100px]:gap-[19px] min-[1101px]:gap-[22px] min-[1101px]:text-[11px] min-[1101px]:whitespace-nowrap min-[1101px]:max-[1340px]:gap-[15px] min-[1101px]:max-[1340px]:text-[10px] max-[800px]:gap-[18px] max-[520px]:absolute max-[520px]:top-[77px] max-[520px]:left-0 max-[520px]:right-0 max-[520px]:p-[22px_6%] max-[520px]:bg-[#f7f7f0] max-[520px]:border-b max-[520px]:border-[#dcded6] max-[520px]:shadow-[0_12px_15px_#152d5008] ${menuOpen ? 'flex max-[520px]:flex-col max-[520px]:items-start max-[520px]:gap-[22px]' : 'max-[520px]:hidden'}`}>
-      <a className="transition-colors duration-200 hover:text-[#b77b26] max-[800px]:text-[10px] max-[520px]:text-[14px]" href="#programmes">All Programs</a>
-      <a className="transition-colors duration-200 hover:text-[#b77b26] max-[800px]:text-[10px] max-[520px]:text-[14px]" href="#approach">Why Xtragenius</a>
-      <a className="transition-colors duration-200 hover:text-[#b77b26] max-[800px]:text-[10px] max-[520px]:text-[14px]" href="#outcomes">Highlights</a>
-      <a className="transition-colors duration-200 hover:text-[#b77b26] max-[800px]:text-[10px] max-[520px]:text-[14px]" href="#legacy">Competitions</a>
-      <a className="transition-colors duration-200 hover:text-[#b77b26] max-[800px]:text-[10px] max-[520px]:text-[14px]" href="#partners">Become a Partner</a>
-      <a className="transition-colors duration-200 hover:text-[#b77b26] max-[800px]:text-[10px] max-[520px]:text-[14px]" href="#proof">150+ Centres</a>
-      <button type="button" className="bg-transparent border-0 [font-family:inherit] text-inherit cursor-pointer p-0 transition-colors duration-200 hover:text-[#b77b26] max-[800px]:text-[10px] max-[520px]:text-[14px]" data-contact="educator enquiry">Educator Portal</button>
-    </nav>
-    <button className={`header-cta ${BUTTON} py-[14px] px-[18px] text-[11px] max-[1100px]:text-[10px] max-[1100px]:gap-[18px] max-[1100px]:p-[17px] max-[800px]:hidden`} data-contact="consultation">Let’s find their potential <span className="text-[17px] leading-[1]">↗</span></button>
-    <button className="menu-toggle hidden max-[520px]:flex max-[520px]:flex-col max-[520px]:gap-[6px] max-[520px]:p-[12px_0_12px_12px]" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} aria-controls="navigation">
-      <span className={`h-[1px] w-[23px] bg-[#192e4e] transition-transform duration-300 ${menuOpen ? '[transform:translateY(3.5px)_rotate(45deg)]' : ''}`}></span>
-      <span className={`h-[1px] w-[23px] bg-[#192e4e] transition-transform duration-300 ${menuOpen ? '[transform:translateY(-3.5px)_rotate(-45deg)]' : ''}`}></span>
-    </button>
-  </header>
+  <Header interactive />
   <main id="main">
     <section className={`${SHELL} pt-[40px] min-[1600px]:pt-[50px] max-[800px]:pt-[25px] max-[520px]:pt-[21px]`} aria-labelledby="hero-title">
       <div className="flex justify-between items-center">
@@ -332,7 +312,7 @@ export default function HomePage() {
         </div>
       </div>
     </section>
-    <section className={SHELL} id="partners">
+    <section className=" max-[800px]:px-[6%] min-[1600px]:[padding-left:max(5.5%,calc((100vw_-_1420px)/2))] min-[1600px]:[padding-right:max(5.5%,calc((100vw_-_1420px)/2))]" id="partners">
       <div className="bg-[#192e4e] text-[#f7f7f0] grid [grid-template-columns:.8fr_1fr] items-center gap-[9%] min-h-[415px] [padding:58px_7%] overflow-hidden max-[1100px]:gap-[7%] max-[1100px]:p-[50px_6%] max-[800px]:[grid-template-columns:1fr] max-[800px]:p-[40px] max-[800px]:gap-[35px] max-[520px]:p-[35px_25px] max-[520px]:gap-[28px]">
         <div className="grid grid-cols-2 w-[240px] gap-[7px] [transform:rotate(-12deg)] text-[#e3b364] max-[1100px]:w-[200px] max-[800px]:w-[140px] max-[800px]:gap-[6px] max-[800px]:[grid-template-columns:repeat(4,1fr)] max-[800px]:[transform:rotate(0)]" aria-hidden="true">
           <span className="text-[134px] leading-[.95] text-center [font-family:Arial,sans-serif] max-[1100px]:text-[110px] max-[800px]:text-[60px] max-[520px]:text-[49px]" style={motion ? {animation:'star-turn 50s linear infinite'} : undefined}>✳</span>
@@ -354,12 +334,21 @@ export default function HomePage() {
     <section data-reveal data-revealed={!motion || undefined} className={`${SHELL} [padding-top:111px] [padding-bottom:108px] text-center border-t border-[rgba(32,49,75,.18)] bg-[#dba34b] text-[#20314b] max-[800px]:pt-[75px] max-[800px]:pb-[75px] max-[520px]:pt-[65px] max-[520px]:pb-[65px] max-[360px]:pt-[55px] ${reveal}`}>
       <span className="text-[8px] text-[#5a3f16] mb-[23px] block tracking-[1.65px] font-[550] max-[520px]:text-[6px] max-[520px]:tracking-[1px]">THE NEXT CHAPTER STARTS WITH CURIOSITY.</span>
       <h2 className="text-[54px] leading-[1.23] tracking-[-2.5px] relative inline-block max-[800px]:text-[43px] max-[520px]:text-[33px] max-[520px]:tracking-[-1.6px] max-[360px]:text-[28px]">Learn more. Think better.<br /><span className="text-[#6b5327]">Grow confidently.</span><span className="text-[#dba34b] text-[55px] absolute bottom-[3px] right-[-65px] max-[800px]:text-[40px] max-[800px]:right-[-48px] max-[520px]:text-[24px] max-[520px]:right-[-19px] max-[520px]:bottom-[5px] max-[360px]:text-[20px] max-[360px]:right-[-15px]" style={motion ? {animation:'star-turn 30s linear infinite'} : undefined}>✳</span></h2>
-      <a className="inline-flex items-center justify-between gap-[30px] bg-[#20314b] text-[#dba34b] border border-[#20314b] rounded-[4px] py-[19px] px-[24px] text-[12px] font-medium transition-[background,transform,box-shadow] duration-[250ms] hover:bg-[#2c4064] hover:-translate-y-[2px] hover:shadow-[0_7px_16px_#172d4c13] flex max-w-[211px] [margin:29px_auto_0] max-[800px]:text-[10px] max-[800px]:max-w-[190px] max-[800px]:p-[17px_18px]" href="#programmes">Find their programme <span className="text-[17px] leading-[1]">↗</span></a>
+      <a className="inline-flex items-center justify-between gap-[30px] bg-[#20314b] text-[#dba34b] border border-[#20314b] rounded-[4px] py-[19px] px-[24px] text-[12px] font-medium transition-[background,transform,box-shadow] duration-[250ms] hover:bg-[#2c4064] hover:-translate-y-[2px] hover:shadow-[0_7px_16px_#172d4c13] flex w-fit whitespace-nowrap [margin:29px_auto_0] max-[800px]:text-[10px] max-[800px]:p-[17px_18px]" href="#programmes">Find their programme <span className="text-[17px] leading-[1]">↗</span></a>
+    </section>
+    <section className={`${SHELL} ${SPACE}`} id="testimonials" aria-labelledby="testimonials-heading">
+      <div data-reveal data-revealed={!motion || undefined} className={`flex items-end justify-between gap-[30px] mb-[44px] max-[800px]:gap-[25px] max-[800px]:items-start max-[800px]:flex-col max-[800px]:mb-[33px] ${reveal}`}>
+        <div>
+          <span className={`${EYEBROW} mb-[24px] text-[#778078] max-[800px]:mb-[17px]`}>07 / IN THEIR OWN WORDS</span>
+          <h2 id="testimonials-heading" className={SECTION_HEADING_H2}>Families and partners.<br /><span className="text-[#868c86]">Telling it like it is.</span></h2>
+        </div>
+      </div>
+      <Testimonials motion={motion} />
     </section>
     <section className={`${SHELL} ${SPACE}`} id="faq" aria-labelledby="faq-heading">
       <div data-reveal data-revealed={!motion || undefined} className={`flex items-end justify-between gap-[30px] mb-[44px] max-[800px]:gap-[25px] max-[800px]:items-start max-[800px]:flex-col max-[800px]:mb-[33px] ${reveal}`}>
         <div>
-          <span className={`${EYEBROW} mb-[24px] text-[#778078] max-[800px]:mb-[17px]`}>07 / YOUR QUESTIONS</span>
+          <span className={`${EYEBROW} mb-[24px] text-[#778078] max-[800px]:mb-[17px]`}>08 / YOUR QUESTIONS</span>
           <h2 id="faq-heading" className={SECTION_HEADING_H2}>Good questions.<br /><span className="text-[#868c86]">Clear answers.</span></h2>
         </div>
       </div>

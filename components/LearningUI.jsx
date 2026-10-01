@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { courses, banners, skillDetails } from '../lib/content';
+import { courses, banners, skillDetails, testimonials } from '../lib/content';
 
 const EYEBROW = "text-[10px] tracking-[1.65px] font-[550] block";
 const TEXT_LINK = "inline-flex items-center gap-[18px] text-[11px] font-[550] pb-[6px] border-b border-[#aab1b6] leading-[1.5] transition-colors duration-200 hover:text-[#b78338]";
@@ -67,6 +67,43 @@ export function Announcements({ motion }) {
       </div>
     </div>
   </section>;
+}
+
+export function Testimonials({ motion }) {
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const disabled = paused || !motion;
+  const n = testimonials.length;
+  useEffect(() => {
+    if (disabled || hovered || focused) return;
+    const timer = setInterval(() => { if (!document.hidden) setIndex(i => (i + 1) % n); }, 6000);
+    return () => clearInterval(timer);
+  }, [disabled, hovered, focused, n]);
+  // Desktop shows a sliding 3-up window starting at `index`; mobile shows only the first of the three.
+  const visible = [0, 1, 2].map(offset => ({ ...testimonials[(index + offset) % n], slot: offset }));
+  return <div aria-roledescription="carousel" aria-label="What families and partners say" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onFocus={() => setFocused(true)} onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false); }}>
+    <div className="border-t border-b border-[#dcded6] [padding:48px_0]" aria-live={disabled ? 'polite' : 'off'}>
+      <div key={index} className="grid grid-cols-3 gap-[35px] max-[800px]:grid-cols-1" style={motion ? { animation: 'banner-in .6s both' } : undefined}>
+        {visible.map(t => <div key={t.name} className={`text-center ${t.slot > 0 ? 'max-[800px]:hidden' : ''}`}>
+          <span className="text-[36px] block text-[#a08b60] leading-[1] mb-[14px]">“</span>
+          <p className="text-[14px] leading-[1.7] text-[#3f453f] max-w-[310px] [margin:0_auto]">{t.quote}</p>
+          <div className="flex items-center justify-center gap-[12px] mt-[22px]">
+            <span className="w-[38px] h-[38px] rounded-full flex items-center justify-center text-[11px] font-semibold text-white shrink-0" style={{ background: t.bg }} aria-hidden="true">{t.initials}</span>
+            <div className="text-left">
+              <strong className="block text-[12px] font-semibold text-[#192e4e]">{t.name}</strong>
+              <span className="block text-[10px] text-[#858b82] mt-[2px]">{t.role}</span>
+            </div>
+          </div>
+        </div>)}
+      </div>
+    </div>
+    <div className="flex items-center justify-center gap-[12px] pt-[22px]">
+      <div className="flex gap-[6px]" role="group" aria-label="Choose testimonial">{testimonials.map((_, i) => <button key={i} className={`h-[20px] w-[23px] relative before:content-[''] before:w-[18px] before:h-[2px] before:absolute before:left-0 before:top-[9px] ${index === i ? 'before:bg-[#192e4e]' : 'before:bg-[#d2d6cc]'}`} onClick={() => setIndex(i)} aria-label={`Testimonial ${i + 1}`} aria-pressed={index === i} />)}</div>
+      <button className="text-[11px] text-[#7b8177]" onClick={() => setPaused(p => !p)} aria-label={disabled ? 'Resume testimonial rotation' : 'Pause testimonial rotation'} disabled={!motion}>{disabled ? '▷' : 'Ⅱ'}</button>
+    </div>
+  </div>;
 }
 
 function CourseDetails({ id }) {
