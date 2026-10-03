@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { courses, banners, skillDetails, testimonials } from '../lib/content';
+import { courses, banners, skillDetails, testimonials, videoTestimonials } from '../lib/content';
 
 const EYEBROW = "text-[12px] tracking-[1.65px] font-[550] block";
 const TEXT_LINK = "inline-flex items-center gap-[18px] text-[13px] font-[550] pb-[6px] border-b border-[#aab1b6] leading-[1.5] transition-colors duration-200 hover:text-[#b78338]";
@@ -69,39 +69,90 @@ export function Announcements({ motion }) {
   </section>;
 }
 
-export function Testimonials({ motion }) {
+const ARROW = "w-[36px] h-[36px] rounded-full border border-[#d7ddcc] text-[#192e4e] text-[16px] flex items-center justify-center transition-colors duration-200 hover:bg-[#192e4e] hover:text-white disabled:opacity-40";
+
+function WindowSlider({ items, motion, label, renderItem }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
+  const n = items.length;
   const disabled = paused || !motion;
-  const n = testimonials.length;
   useEffect(() => {
     if (disabled || hovered || focused) return;
     const timer = setInterval(() => { if (!document.hidden) setIndex(i => (i + 1) % n); }, 6000);
     return () => clearInterval(timer);
   }, [disabled, hovered, focused, n]);
-  // Desktop shows a sliding 3-up window starting at `index`; mobile shows only the first of the three.
-  const visible = [0, 1, 2].map(offset => ({ ...testimonials[(index + offset) % n], slot: offset }));
-  return <div aria-roledescription="carousel" aria-label="What families and partners say" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onFocus={() => setFocused(true)} onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false); }}>
-    <div className="border-t border-b border-[#dcded6] [padding:48px_0]" aria-live={disabled ? 'polite' : 'off'}>
-      <div key={index} className="grid grid-cols-3 gap-[35px] max-[800px]:grid-cols-1" style={motion ? { animation: 'banner-in .6s both' } : undefined}>
-        {visible.map(t => <div key={t.name} className={`text-center ${t.slot > 0 ? 'max-[800px]:hidden' : ''}`}>
-          <span className="text-[36px] block text-[#a08b60] leading-[1] mb-[14px]">“</span>
-          <p className="text-[16px] leading-[1.7] text-[#3f453f] max-w-[310px] [margin:0_auto]">{t.quote}</p>
-          <div className="flex items-center justify-center gap-[12px] mt-[22px]">
-            <span className="w-[38px] h-[38px] rounded-full flex items-center justify-center text-[13px] font-semibold text-white shrink-0" style={{ background: t.bg }} aria-hidden="true">{t.initials}</span>
-            <div className="text-left">
-              <strong className="block text-[14px] font-semibold text-[#192e4e]">{t.name}</strong>
-              <span className="block text-[12px] text-[#858b82] mt-[2px]">{t.role}</span>
-            </div>
-          </div>
-        </div>)}
+  const visible = [0, 1, 2].map(offset => ({ item: items[(index + offset) % n], slot: offset }));
+  const step = d => setIndex(i => (i + d + n) % n);
+  return <div aria-roledescription="carousel" aria-label={label} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onFocus={() => setFocused(true)} onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false); }}>
+    <div key={index} className="grid grid-cols-3 gap-[35px] max-[800px]:grid-cols-1" aria-live={disabled ? 'polite' : 'off'} style={motion ? { animation: 'banner-in .6s both' } : undefined}>
+      {visible.map(({ item, slot }) => <div key={slot} className={slot > 0 ? 'max-[800px]:hidden' : ''}>{renderItem(item)}</div>)}
+    </div>
+    <div className="flex items-center justify-center gap-[14px] pt-[22px]">
+      <button className={ARROW} onClick={() => step(-1)} aria-label={`Previous ${label}`}>←</button>
+      <div className="flex gap-[6px]" role="group" aria-label={`Choose from ${label}`}>{items.map((_, i) => <button key={i} className={`h-[20px] w-[23px] relative before:content-[''] before:w-[18px] before:h-[2px] before:absolute before:left-0 before:top-[9px] ${index === i ? 'before:bg-[#192e4e]' : 'before:bg-[#d2d6cc]'}`} onClick={() => setIndex(i)} aria-label={`${label} ${i + 1}`} aria-pressed={index === i} />)}</div>
+      <button className={ARROW} onClick={() => step(1)} aria-label={`Next ${label}`}>→</button>
+      <button className="ml-[6px] text-[13px] text-[#7b8177]" onClick={() => setPaused(p => !p)} aria-label={disabled ? `Resume ${label}` : `Pause ${label}`} disabled={!motion}>{disabled ? '▷' : 'Ⅱ'}</button>
+    </div>
+  </div>;
+}
+
+function renderText(t) {
+  return <div className="text-center">
+    <span className="text-[44px] block text-[#a08b60] leading-[1] mb-[14px]">“</span>
+    <p className="text-[16px] leading-[1.7] text-[#3f453f] max-w-[310px] [margin:0_auto]">{t.quote}</p>
+    <div className="flex items-center justify-center gap-[12px] mt-[22px]">
+      <span className="w-[38px] h-[38px] rounded-full flex items-center justify-center text-[12px] font-semibold text-white shrink-0" style={{ background: t.bg }} aria-hidden="true">{t.initials}</span>
+      <div className="text-left">
+        <strong className="block text-[14px] font-semibold text-[#192e4e]">{t.name}</strong>
+        <span className="block text-[12px] text-[#858b82] mt-[2px]">{t.role}</span>
       </div>
     </div>
-    <div className="flex items-center justify-center gap-[12px] pt-[22px]">
-      <div className="flex gap-[6px]" role="group" aria-label="Choose testimonial">{testimonials.map((_, i) => <button key={i} className={`h-[20px] w-[23px] relative before:content-[''] before:w-[18px] before:h-[2px] before:absolute before:left-0 before:top-[9px] ${index === i ? 'before:bg-[#192e4e]' : 'before:bg-[#d2d6cc]'}`} onClick={() => setIndex(i)} aria-label={`Testimonial ${i + 1}`} aria-pressed={index === i} />)}</div>
-      <button className="text-[13px] text-[#7b8177]" onClick={() => setPaused(p => !p)} aria-label={disabled ? 'Resume testimonial rotation' : 'Pause testimonial rotation'} disabled={!motion}>{disabled ? '▷' : 'Ⅱ'}</button>
+  </div>;
+}
+
+function renderVideo(v) {
+  return <figure className="group">
+    <div className="relative aspect-video rounded-[8px] overflow-hidden flex items-center justify-center" style={{ background: v.bg }}>
+      <span className="w-[56px] h-[56px] rounded-full bg-white/90 text-[#192e4e] text-[18px] flex items-center justify-center transition-transform duration-300 group-hover:scale-110" aria-hidden="true">▶</span>
+      <span className="absolute bottom-[12px] left-[14px] text-[13px] tracking-[1px] text-white/90">VIDEO COMING SOON</span>
+    </div>
+    <figcaption className="mt-[12px]">
+      <strong className="block text-[17px] font-semibold text-[#192e4e]">{v.name}</strong>
+      <span className="block text-[15px] text-[#858b82] mt-[2px]">{v.role}</span>
+    </figcaption>
+  </figure>;
+}
+
+export function Testimonials({ motion }) {
+  return <>
+    <WindowSlider items={testimonials} motion={motion} label="Testimonials" renderItem={renderText} />
+    <div className="mt-[56px]">
+      <span className="block text-[14px] tracking-[1.65px] font-[550] text-[#778078] mb-[20px]">VIDEO TESTIMONIALS</span>
+      <WindowSlider items={videoTestimonials} motion={motion} label="Video testimonials" renderItem={renderVideo} />
+    </div>
+  </>;
+}
+
+const HERO_BANNER_IMAGE = '/images/banners/competition.png';
+const HERO_BANNER_ALT = '25th National Level Offline Abacus Competition — Xtragenius';
+
+export function HeroBanners({ motion }) {
+  const [index, setIndex] = useState(0);
+  const [hovered, setHovered] = useState(false);
+  const n = 3;
+  useEffect(() => {
+    if (!motion || hovered) return;
+    const timer = setInterval(() => { if (!document.hidden) setIndex(i => (i + 1) % n); }, 6000);
+    return () => clearInterval(timer);
+  }, [motion, hovered]);
+  return <div className="mt-[28px]" aria-roledescription="carousel" aria-label="Featured announcements" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+    <div className="relative overflow-hidden rounded-[8px] aspect-[1426/512] bg-[#192e4e]">
+      {Array.from({ length: n }, (_, i) => <img key={i} src={HERO_BANNER_IMAGE} alt={index === i ? HERO_BANNER_ALT : ''} aria-hidden={index !== i} className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${index === i ? 'opacity-100' : 'opacity-0'}`} />)}
+    </div>
+    <div className="flex justify-center gap-[8px] mt-[14px]" role="group" aria-label="Choose banner">
+      {Array.from({ length: n }, (_, i) => <button key={i} onClick={() => setIndex(i)} aria-label={`Banner ${i + 1}`} aria-pressed={index === i} className={`h-[8px] rounded-full transition-all duration-300 ${index === i ? 'w-[28px] bg-[#192e4e]' : 'w-[8px] bg-[#c9cdc3]'}`} />)}
     </div>
   </div>;
 }

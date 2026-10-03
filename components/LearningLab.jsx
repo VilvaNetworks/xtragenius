@@ -21,13 +21,15 @@ function Bead({ x, y, active, upper, label, onSelect, gradient, disabled, motion
   </g>;
 }
 
-function Abacus({ value, setValue, hidden, disabled, visualizing, motion }) {
+function Abacus({ value, setValue, hidden, interactive, onInteract, visualizing, motion }) {
   const id = useId().replaceAll(':','');
-  const columns = [0, Math.floor(value / 10), value % 10];
+  const columns = [Math.floor(value / 100), Math.floor(value / 10) % 10, value % 10];
   const places = ['hundreds','tens','ones'];
   function select(column, digit) {
-    if(column === 0) return;
-    setValue(column === 1 ? digit * 10 + value % 10 : Math.floor(value / 10) * 10 + digit);
+    if(!interactive) { onInteract(); return; }
+    const digits = [Math.floor(value / 100), Math.floor(value / 10) % 10, value % 10];
+    digits[column] = digit;
+    setValue(digits[0] * 100 + digits[1] * 10 + digits[2]);
   }
   const bodyFade = hidden ? 'opacity-[.08] blur-[6px] pointer-events-none' : visualizing ? 'opacity-[.12]' : '';
   const labelsFade = hidden ? 'opacity-[.15]' : visualizing ? 'opacity-30' : '';
@@ -49,10 +51,10 @@ function Abacus({ value, setValue, hidden, disabled, visualizing, motion }) {
       <path d="M126 75H422" stroke="#132c44" strokeOpacity=".3" strokeWidth="3"/>
       {[174,274,374].map((x,i) => <g key={x} className={`abacus-column column-${i}`}>
         <rect x={x-2.7} y="77" width="5.4" height="244" rx="2.7" fill={`url(#${id}-rod)`}/>
-        <Bead x={x} y={columns[i]>=5 ? 133 : 95} active={columns[i]>=5} upper label={`Toggle five on ${places[i]} rod`} gradient={`${id}-${columns[i]>=5 ? 'gold' : 'bead'}`} disabled={disabled || i===0} motion={motion} onSelect={()=>select(i, columns[i]>=5 ? columns[i]-5 : columns[i]+5)}/>
+        <Bead x={x} y={columns[i]>=5 ? 133 : 95} active={columns[i]>=5} upper label={`Toggle five on ${places[i]} rod`} gradient={`${id}-${columns[i]>=5 ? 'gold' : 'bead'}`} motion={motion} onSelect={()=>select(i, columns[i]>=5 ? columns[i]-5 : columns[i]+5)}/>
         {[0,1,2,3].map(j => {
           const active = j < columns[i]%5;
-          return <Bead key={j} x={x} y={active ? 177+j*27 : 224+j*27} active={active} label={`${j+1} unit bead on ${places[i]} rod`} gradient={`${id}-${active ? 'gold' : 'bead'}`} disabled={disabled || i===0} motion={motion} onSelect={()=>select(i,(columns[i]>=5?5:0)+(active?j:j+1))}/>;
+          return <Bead key={j} x={x} y={active ? 177+j*27 : 224+j*27} active={active} label={`${j+1} unit bead on ${places[i]} rod`} gradient={`${id}-${active ? 'gold' : 'bead'}`} motion={motion} onSelect={()=>select(i,(columns[i]>=5?5:0)+(active?j:j+1))}/>;
         })}
       </g>)}
       <rect x="119" y="150" width="310" height="12" rx="2" fill="#203a52"/>
@@ -65,7 +67,7 @@ function Abacus({ value, setValue, hidden, disabled, visualizing, motion }) {
   </svg>;
 }
 
-export default function LearningLab({ skill, motion }) {
+export default function LearningLab({ skill, motion, onInteract }) {
   const [value,setValue] = useState(37);
   const [touched,setTouched] = useState(false);
   const [step,setStep] = useState(0);
@@ -115,7 +117,7 @@ export default function LearningLab({ skill, motion }) {
       <div className="absolute [font-family:monospace] text-[18px] text-[#a4b09d] bottom-[52px] right-[11%] max-[520px]:bottom-[25px]" aria-hidden="true">+</div>
       <div className="absolute top-[38px] left-[5px] text-[10px] leading-[1.9] tracking-[1.25px] text-[#98a18e] min-[801px]:max-[1100px]:text-[9px] min-[801px]:max-[1100px]:top-[35px] max-[520px]:text-[8px] max-[520px]:top-[26px] max-[520px]:left-0 max-[520px]:tracking-[1px]">A SMALL DISCOVERY.<br/><span className="text-[#4c635b]">A STRONGER MIND.</span></div>
       <div className="absolute right-[15%] top-[11px] [font-family:var(--display)] text-[210px] font-normal tracking-[-18px] leading-[1] text-[#e9ebe0] -z-[1] select-none min-[801px]:max-[1100px]:text-[150px] max-[520px]:text-[155px] max-[520px]:tracking-[-12px] max-[520px]:top-[17px] max-[520px]:right-[16%]" aria-hidden="true">{concealed?'?':displayed}</div>
-      <div className="w-[101%] absolute left-[-7%] top-[35px] [transform:perspective(1100px)_rotateY(-15deg)_rotateX(12deg)_rotateZ(-9deg)] [transform-origin:50%_65%] min-[1600px]:top-[40px] min-[801px]:max-[1100px]:w-[108%] min-[801px]:max-[1100px]:left-[-8%] min-[801px]:max-[1100px]:top-[36px] max-[800px]:top-[20px] max-[520px]:w-[109%] max-[520px]:left-[-9%] max-[520px]:top-[32px]"><Abacus value={displayed} setValue={chooseValue} hidden={concealed} disabled={skill===1 || skill===2 || skill===3} visualizing={skill===3} motion={motion}/></div>
+      <div className="w-[101%] absolute left-[-7%] top-[35px] [transform:perspective(1100px)_rotateY(-15deg)_rotateX(12deg)_rotateZ(-9deg)] [transform-origin:50%_65%] min-[1600px]:top-[40px] min-[801px]:max-[1100px]:w-[108%] min-[801px]:max-[1100px]:left-[-8%] min-[801px]:max-[1100px]:top-[36px] max-[800px]:top-[20px] max-[520px]:w-[109%] max-[520px]:left-[-9%] max-[520px]:top-[32px]"><Abacus value={displayed} setValue={chooseValue} hidden={concealed} interactive={skill===0} onInteract={onInteract} visualizing={skill===3} motion={motion}/></div>
 
       <div className={`absolute z-[3] right-[-1%] top-[62px] w-[175px] [padding:19px_17px_15px] [background:linear-gradient(125deg,#fffef8,#f4f1e5)] border border-white rounded-[6px] shadow-[0_18px_45px_-17px_#2d3f4933,0_0_0_1px_#d8ddce66] [transform:rotate(5deg)] before:content-[''] before:absolute before:w-[27px] before:h-[5px] before:left-[16px] before:top-[-3px] before:[background:#d1a553] before:rounded-[2px] min-[1600px]:top-[80px] min-[1600px]:right-0 min-[1600px]:w-[190px] min-[801px]:max-[1100px]:w-[145px] min-[801px]:max-[1100px]:[padding:14px_12px] min-[801px]:max-[1100px]:top-[49px] min-[801px]:max-[1100px]:right-[-3%] max-[800px]:right-[1%] max-[520px]:w-[137px] max-[520px]:right-0 max-[520px]:top-[39px] max-[520px]:[padding:13px_12px_12px] max-[520px]:rounded-[4px] max-[360px]:w-[119px] max-[360px]:[padding:11px_9px] ${skill===1 ? 'w-[203px] top-[63px] right-[-2%] min-[1600px]:top-[95px] min-[1600px]:right-[-1%] min-[801px]:max-[1100px]:w-[175px] max-[520px]:w-[160px] max-[520px]:right-[-1%] max-[520px]:top-[44px]' : ''}`} style={motion ? {animation:'learning-note-float 7s ease-in-out infinite'} : undefined}>
         <span className="text-[9px] tracking-[1px] text-[#909984] block min-[801px]:max-[1100px]:text-[8px] max-[520px]:text-[8px] max-[520px]:tracking-[.6px] max-[360px]:text-[4.5px]">{skill===1?'A LITTLE MENTAL MATHS':skill===2?'YOUR MENTAL PICTURE':'A NUMBER YOU CAN SEE'}</span>
@@ -139,7 +141,7 @@ export default function LearningLab({ skill, motion }) {
         <div><strong className="block text-[14px] font-medium tracking-[-.15px] min-[801px]:max-[1100px]:text-[12px] max-[520px]:text-[12px]">{activity.title}</strong><p className="mt-[4px] text-[12px] leading-[1.5] text-[#89927f] min-[801px]:max-[1100px]:text-[11px] max-[520px]:text-[11px]">{activity.instruction}</p></div>
         <span className="ml-auto shrink-0 text-[10px] tracking-[.9px] text-[#7b8873] flex gap-[5px] items-center min-[801px]:max-[1100px]:text-[9px] max-[520px]:text-[9px] max-[520px]:gap-[4px] max-[360px]:hidden"><i className="h-[4px] w-[4px] [background:#8d9e79] rounded-full" style={motion ? {animation:'learning-pulse 3s ease-in-out infinite'} : undefined}/> TRY IT</span>
       </div>
-      {skill===0 && <div className="flex items-center gap-[15px] min-h-[49px] border-t border-[#e2e5d9] mt-[14px] max-[520px]:min-h-[45px] max-[520px]:gap-[12px] max-[520px]:mt-[12px]"><label className="text-[11px] text-[#788770] whitespace-nowrap max-[520px]:text-[10px]" htmlFor="explore-number">Explore a number</label><input className="[accent-color:#b38a48] w-full min-w-0 h-[3px] cursor-pointer m-0 appearance-none [background:#dfe3d6] rounded-[5px]" id="explore-number" type="range" min="0" max="99" value={value} onChange={e=>chooseValue(Number(e.target.value))}/><output className="[font-family:var(--display)] text-[20px] tracking-[-1px] min-w-[23px] text-right max-[520px]:text-[18px]" htmlFor="explore-number" aria-live="off">{value.toString().padStart(2,'0')}</output></div>}
+      {skill===0 && <div className="flex items-center gap-[15px] min-h-[49px] border-t border-[#e2e5d9] mt-[14px] max-[520px]:min-h-[45px] max-[520px]:gap-[12px] max-[520px]:mt-[12px]"><label className="text-[11px] text-[#788770] whitespace-nowrap max-[520px]:text-[10px]" htmlFor="explore-number">Explore a number</label><input className="[accent-color:#b38a48] w-full min-w-0 h-[3px] cursor-pointer m-0 appearance-none [background:#dfe3d6] rounded-[5px]" id="explore-number" type="range" min="0" max="999" value={value} onChange={e=>chooseValue(Number(e.target.value))}/><output className="[font-family:var(--display)] text-[20px] tracking-[-1px] min-w-[23px] text-right max-[520px]:text-[18px]" htmlFor="explore-number" aria-live="off">{value.toString().padStart(3,'0')}</output></div>}
       {skill===1 && <div className="flex items-center justify-between gap-[15px] min-h-[49px] border-t border-[#e2e5d9] mt-[14px] min-[801px]:max-[1100px]:gap-[6px]"><span className="text-[11px] text-[#84917a] leading-[1.55] max-w-[245px] min-[801px]:max-[1100px]:text-[10px] max-[520px]:text-[10px]">{step ? `${a} + ${b} = ${a+b}. See how the beads moved?` : 'Make a prediction, then see it on the abacus.'}</span><button className="text-[12px] whitespace-nowrap inline-flex items-center gap-[12px] [padding:9px_0_9px_8px] hover:text-[#ad7d30] min-[801px]:max-[1100px]:text-[11px] min-[801px]:max-[1100px]:gap-[6px] max-[520px]:text-[11px] max-[520px]:gap-[5px]" type="button" onClick={()=>{setTouched(true);if(step)nextChallenge();else setStep(1);}}>{step?'Try another':'See the answer'} <span>↗</span></button></div>}
       {skill===2 && <div className="flex items-center justify-between gap-[15px] min-h-[49px] border-t border-[#e2e5d9] mt-[14px]">{!remembering ? <><span className="text-[11px] text-[#84917a] leading-[1.55] max-w-[245px]">No rush. Remember the pattern.</span><button className="text-[12px] whitespace-nowrap inline-flex items-center gap-[12px] [padding:9px_0_9px_8px] hover:text-[#ad7d30]" type="button" onClick={()=>{setTouched(true);setRemembering(true);setAnswer(null);}}>I’ve got it <span>↗</span></button></> : <><span role="status" className="text-[11px] text-[#84917a] leading-[1.55] max-w-[245px]">{answer===null?'Which number did you see?':answer===value?'Exactly. You held the picture in your mind.':'Good try. Look at the beads and try again.'}</span>{answer===null?<div className="flex gap-[6px]">{choices.map(choice=><button key={choice} className="[padding:5px_9px] border border-[#d7ddcc] [background:#f7f8ed] rounded-[3px] text-[13px] min-w-[33px] justify-center hover:[background:#e5e9d9]" type="button" aria-label={`Remembered number ${choice}`} onClick={()=>setAnswer(choice)}>{choice}</button>)}</div>:<button className="text-[12px] whitespace-nowrap inline-flex items-center gap-[12px] [padding:9px_0_9px_8px] hover:text-[#ad7d30]" type="button" onClick={()=>{setRemembering(false);setAnswer(null);setValue(v=>(v+17)%90+5);}}>Try again <span>↗</span></button>}</>}</div>}
       {skill===3 && <div className="flex items-center gap-[15px] min-h-[49px] border-t border-[#e2e5d9] mt-[14px] max-[520px]:min-h-[45px] max-[520px]:gap-[12px] max-[520px]:mt-[12px]"><label className="text-[11px] text-[#788770] whitespace-nowrap max-[520px]:text-[10px]" htmlFor="visualize-number">Picture a number</label><input className="[accent-color:#b38a48] w-full min-w-0 h-[3px] cursor-pointer m-0 appearance-none [background:#dfe3d6] rounded-[5px]" id="visualize-number" type="range" min="1" max="49" value={Math.min(value,49)} onChange={e=>chooseValue(Number(e.target.value))}/><output className="[font-family:var(--display)] text-[20px] tracking-[-1px] min-w-[23px] text-right max-[520px]:text-[18px]" htmlFor="visualize-number">{value}</output></div>}

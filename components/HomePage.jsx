@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import Header from './Header';
 import LearningLab from './LearningLab';
-import { CourseGrid, Announcements, Testimonials, DetailDialog } from './LearningUI';
+import { CourseGrid, Announcements, Testimonials, HeroBanners, DetailDialog } from './LearningUI';
 import { skillDetails } from '../lib/content';
 
 const SHELL = "px-[5.5%] max-[800px]:px-[6%] min-[1600px]:[padding-left:max(5.5%,calc((100vw_-_1420px)/2))] min-[1600px]:[padding-right:max(5.5%,calc((100vw_-_1420px)/2))]";
@@ -11,6 +11,19 @@ const EYEBROW = "text-[12px] tracking-[1.65px] font-[550] block";
 const TINY_CROSS = "font-mono text-[23px] text-[#dba34b] font-normal";
 const TEXT_LINK = "inline-flex items-center gap-[18px] text-[13px] font-[550] pb-[6px] border-b border-[#aab1b6] leading-[1.5] transition-colors duration-200 hover:text-[#b78338]";
 const BUTTON = "inline-flex items-center justify-between gap-[30px] bg-[#192e4e] text-white text-[14px] font-medium py-[19px] px-[24px] border border-[#192e4e] rounded-[4px] transition-[background,transform,box-shadow] duration-[250ms] hover:bg-[#2a456d] hover:-translate-y-[2px] hover:shadow-[0_7px_16px_#172d4c13]";
+const HERO_SLIDES = [
+  ['The potential', 'is already there.', 'Let’s shape it.'],
+  ['Seen on Vijay TV.', 'Small beads,', 'big ideas.'],
+  ['Mind growth.', 'Lifelong', 'possibility.'],
+];
+const PROOF_STATS = [
+  { n:'25', u:'+', label:'Years of experience' },
+  { n:'150', u:'+', label:'Learning centres' },
+  { n:'350', u:'+', label:'Educators being onboarded' },
+  { n:'50', u:'+', label:'Exams conducted' },
+  { n:'5000', u:'+', label:'Students attended' },
+  { n:'ISO 9001:2015', label:'Certified quality. Lasting trust.', icon:true },
+];
 const SECTION_HEADING_H2 = "[font-family:var(--display)] text-[clamp(34px,3.3vw,49px)] leading-[1.2] font-medium tracking-[-2px] max-[800px]:text-[39px] max-[520px]:text-[32px] max-[520px]:tracking-[-1.5px]";
 
 export default function HomePage() {
@@ -19,6 +32,12 @@ export default function HomePage() {
   const [filter, setFilter] = useState('all');
   const [view, setView] = useState(null);
   const [openFaq, setOpenFaq] = useState(0);
+  const [heroSlide, setHeroSlide] = useState(0);
+  useEffect(() => {
+    if (!motion) return;
+    const timer = setInterval(() => { if (!document.hidden) setHeroSlide(i => (i + 1) % HERO_SLIDES.length); }, 5500);
+    return () => clearInterval(timer);
+  }, [motion]);
   useEffect(() => {
     const media = matchMedia('(prefers-reduced-motion: reduce)');
     setMotion(!media.matches);
@@ -57,10 +76,14 @@ export default function HomePage() {
   return <div onClick={handleClick}>
 
   <a className="fixed left-[20px] top-[-60px] p-[15px] bg-[#192e4e] text-white z-[100] focus:top-[10px]" href="#main">Skip to content</a>
-  <div className="flex justify-center items-center gap-[10px] text-[13px] tracking-[.15px] bg-[#192e4e] text-[#e8e9e8] min-h-[35px] max-[520px]:text-[11px] max-[520px]:gap-[7px] max-[520px]:min-h-[32px]">
-    <span className="w-[5px] h-[5px] rounded-full bg-[#e1b261] shadow-[0_0_0_3px_#ffffff0a]"></span>
-    A legacy of learning. A new world of possibilities.
-    <a className="text-[#ecc486] ml-[9px] max-[520px]:ml-0" href="#programmes">Now online <span className="ml-[8px]">↗</span></a>
+  <div className="overflow-hidden bg-[#192e4e] text-[#e8e9e8] min-h-[35px] flex items-center text-[13px] tracking-[.15px] max-[520px]:text-[11px] max-[520px]:min-h-[32px]">
+    <div className="flex w-max items-center whitespace-nowrap" style={motion ? {animation:'marquee 30s linear infinite'} : undefined}>
+      {[0, 1,2,3].map(copy => <div key={copy} className="flex items-center gap-[40px] pr-[40px] shrink-0" aria-hidden={copy === 1 || undefined}>
+        <span>A legacy of learning. A new world of possibilities.</span>
+        <a className="text-[#ecc486]" href="#programmes" tabIndex={copy === 1 ? -1 : undefined}>Now online <span className="ml-[6px]">↗</span></a>
+        <span className="w-[5px] h-[5px] rounded-full bg-[#e1b261] shrink-0"></span>
+      </div>)}
+    </div>
   </div>
   <Header interactive />
   <main id="main">
@@ -72,13 +95,13 @@ export default function HomePage() {
       <div className="grid [grid-template-columns:1.08fr_1fr] gap-[3%] items-center [padding:49px_0_34px] min-[1600px]:gap-[7%] min-[1600px]:[padding-top:60px] min-[1600px]:[padding-bottom:50px] max-[1100px]:gap-[2%] max-[800px]:[grid-template-columns:1fr] max-[800px]:gap-[20px] max-[800px]:pt-[40px] max-[520px]:pt-[30px] max-[520px]:gap-[35px] max-[520px]:pb-[22px]">
         <div className="relative [padding:8px_0_18px] max-[800px]:max-w-[550px]">
           <h1 id="hero-title" className="[font-family:var(--display)] text-[clamp(54px,5.6vw,86px)] tracking-[-4.2px] font-medium leading-[1.12] relative min-[1600px]:text-[88px] max-[1100px]:tracking-[-3px] max-[800px]:text-[68px] max-[520px]:text-[clamp(42px,11.5vw,60px)] max-[520px]:tracking-[-2.9px] max-[520px]:leading-[1.14]">
-            <span className="text-[#818784]">The potential</span><br />is already there.<br /><span>Let’s shape it.</span>
+            <span className="inline-block relative whitespace-nowrap">{HERO_SLIDES.map((slide, i) => <span key={i} className={`block transition-opacity duration-700 ${heroSlide === i ? 'opacity-100' : 'opacity-0 absolute inset-x-0 top-0 pointer-events-none'}`} aria-hidden={heroSlide !== i}><span className="block text-[#818784]">{slide[0]}</span><span className="block">{slide[1]}</span><span className="block">{slide[2]}</span></span>)}</span>
             <span className="inline-block absolute text-[#dba34b] text-[60px] leading-[1] bottom-[3px] ml-[13px] max-[1100px]:text-[43px] max-[1100px]:ml-[8px] max-[520px]:text-[38px] max-[520px]:ml-[8px] max-[520px]:bottom-[2px]" aria-hidden="true" style={motion ? {animation:'star-turn 28s linear infinite'} : undefined}>✳</span>
           </h1>
           <p className="text-[16px] leading-[1.9] text-[#747b7d] mt-[27px] max-[1100px]:text-[14px] max-[800px]:text-[16px] max-[520px]:text-[14px] max-[520px]:mt-[23px]">Other programmes teach children <strong className="text-[#192e4e] font-semibold">what</strong> to learn.<br />We train them <strong className="text-[#192e4e] font-semibold">how</strong> to learn. Unlock your child’s extra<br className="max-[520px]:hidden" /> potential, one extraordinary discovery at a time.</p>
           <div className="flex items-center gap-[26px] mt-[29px] max-[1100px]:gap-[18px] max-[520px]:mt-[23px] max-[520px]:gap-[18px]">
             <a className={`${BUTTON} max-[1100px]:text-[12px] max-[1100px]:gap-[18px] max-[1100px]:p-[17px] max-[800px]:text-[14px] max-[800px]:p-[18px_24px] max-[520px]:p-[16px] max-[520px]:text-[12px] max-[520px]:gap-[18px]`} href="#programmes">Explore programmes <span className="text-[19px] leading-[1]">↗</span></a>
-            <a className={`${TEXT_LINK} max-[1100px]:text-[12px] max-[1100px]:gap-[9px] max-[800px]:text-[13px] max-[800px]:gap-[16px] max-[520px]:text-[12px] max-[520px]:gap-[9px]`} href="#approach">Discover our approach <span className="text-[18px]">↓</span></a>
+            <a className={`${TEXT_LINK} max-[1100px]:text-[12px] max-[1100px]:gap-[9px] max-[800px]:text-[13px] max-[800px]:gap-[16px] max-[520px]:text-[12px] max-[520px]:gap-[9px]`} href="#press"><span className="flex flex-col gap-[2px]"><span>Discover our approach</span><span className="text-[12px] font-normal text-[#777d82]">As featured on Vijay TV · watch the story</span></span> <span className="text-[18px]">↓</span></a>
           </div>
           <div className="mt-[37px] flex gap-[12px] items-center text-[#7d8383] text-[12px] leading-[1.7] max-[1100px]:mt-[28px] max-[800px]:hidden">
             <span className="text-[32px] text-[#9b9e8d]">◎</span>
@@ -89,7 +112,7 @@ export default function HomePage() {
           <div className="absolute top-0 left-[8px] right-0 flex items-center gap-[8px] text-[11px] tracking-[1.5px] text-[#757d80] max-[520px]:left-0 max-[520px]:text-[9px] max-[520px]:tracking-[1.2px]">
             <span className="font-mono text-[18px] text-[#9a9d91] font-normal">+</span> THE LITTLE LEARNING LAB <span className="caption-index ml-auto font-mono text-[12px] max-[520px]:text-[10px]">0{shape + 1} / 04</span>
           </div>
-          <LearningLab key={shape} skill={shape} motion={motion} />
+          <LearningLab key={shape} skill={shape} motion={motion} onInteract={() => setShape(0)} />
           <div className="absolute bottom-[58px] left-[8px] right-0 flex items-center justify-between max-[520px]:bottom-[50px] max-[520px]:left-0">
             <span className="text-[11px] tracking-[1.4px] text-[#737b7d] max-[520px]:text-[9px]">REAL LEARNING. RIGHT AT YOUR FINGERTIPS.</span>
             <button id="motion-toggle" className="text-[12px] flex items-center gap-[7px] text-[#737b7d] max-[520px]:text-[11px]" aria-pressed={motion}>Motion {motion ? "on" : "off"} <span className={`w-[5px] h-[5px] rounded-full ${motion ? 'bg-[#749582]' : 'bg-[#aaa]'}`}></span></button>
@@ -103,26 +126,21 @@ export default function HomePage() {
         <span>MIND DEVELOPMENT. LIFELONG POSSIBILITY.</span>
         <a className="text-[12px] tracking-[.1px] max-[520px]:text-[11px]" href="#proof">A little scroll. A bigger perspective. <span className="ml-[34px] text-[20px] text-[#192e4e] max-[520px]:ml-[7px] max-[520px]:text-[15px]">↓</span></a>
       </div>
+      <HeroBanners motion={motion} />
     </section>
-    <section className={`${SHELL} bg-[#eeefe7] border-t border-[#e5e6df] border-b border-[#e0e2d9] grid [grid-template-columns:1.3fr_1fr_1fr_1.35fr_1.45fr] items-center [padding-top:34px] [padding-bottom:34px] gap-[27px] max-[1100px]:gap-[18px] max-[800px]:[grid-template-columns:repeat(3,1fr)] max-[800px]:gap-[25px] max-[800px]:pt-[27px] max-[800px]:pb-[30px] max-[520px]:[column-gap:9px] max-[520px]:[row-gap:22px]`} id="proof" aria-label="Our legacy in numbers">
-      <div className="text-[14px] leading-[1.9] text-[#78807d] max-[1100px]:text-[12px] max-[800px]:col-span-full max-[800px]:text-[14px] max-[800px]:flex max-[800px]:gap-[5px] max-[520px]:text-[13px]">Rooted in Chennai.<br className="max-[800px]:hidden" /><strong className="font-medium text-[#192e4e]">Trusted across India.</strong></div>
-      <div className="border-l border-[#d8dcd4] pl-[31px] flex flex-col gap-[6px] max-[1100px]:pl-[20px] max-[800px]:pl-[20px] max-[800px]:first:border-0 max-[520px]:pl-[12px]">
-        <strong className="[font-family:var(--display)] text-[35px] font-medium tracking-[-1.5px] leading-[1.15] max-[520px]:text-[31px]"><span>25</span><span className="text-[#a48653] text-[27px] max-[520px]:text-[26px]">+</span></strong>
-        <span className="text-[12px] text-[#737b7b] max-[520px]:text-[10px] max-[520px]:leading-[1.5]">Years of experience</span>
-      </div>
-      <div className="border-l border-[#d8dcd4] pl-[31px] flex flex-col gap-[6px] max-[1100px]:pl-[20px] max-[800px]:pl-[20px] max-[520px]:pl-[12px]">
-        <strong className="[font-family:var(--display)] text-[35px] font-medium tracking-[-1.5px] leading-[1.15] max-[520px]:text-[31px]"><span>150</span><span className="text-[#a48653] text-[27px] max-[520px]:text-[26px]">+</span></strong>
-        <span className="text-[12px] text-[#737b7b] max-[520px]:text-[10px] max-[520px]:leading-[1.5]">Learning centres</span>
-      </div>
-      <div className="border-l border-[#d8dcd4] pl-[31px] flex flex-col gap-[6px] max-[1100px]:pl-[20px] max-[800px]:pl-[20px] max-[520px]:pl-[12px]">
-        <strong className="[font-family:var(--display)] text-[35px] font-medium tracking-[-1.5px] leading-[1.15] max-[520px]:text-[31px]"><span>350</span><span className="text-[#a48653] text-[27px] max-[520px]:text-[26px]">+</span></strong>
-        <span className="text-[12px] text-[#737b7b] max-[520px]:text-[10px] max-[520px]:leading-[1.5]">Educators being onboarded</span>
-      </div>
-      <div className="flex items-center gap-[15px] pl-[22px] border-l border-[#d8dcd4] max-[1100px]:gap-[10px] max-[1100px]:pl-[15px] max-[800px]:col-span-full max-[800px]:pl-0 max-[800px]:border-0 max-[800px]:pt-[5px] max-[520px]:gap-[13px]">
-        <span className="text-[44px] text-[#8a907d] border border-[#a3a791] outline outline-1 outline-[#a3a791] outline-offset-[3px] rounded-full w-[45px] h-[45px] flex items-center justify-center max-[1100px]:w-[34px] max-[1100px]:h-[34px] max-[1100px]:text-[32px] max-[800px]:w-[28px] max-[800px]:h-[28px] max-[800px]:text-[27px]">✧</span>
-        <div>
-          <strong className="text-[13px] tracking-[.4px] max-[1100px]:text-[12px] max-[800px]:text-[13px]">ISO 9001:2015</strong>
-          <span className="block text-[#737b7b] text-[11px] mt-[7px] max-[1100px]:text-[10px] max-[800px]:text-[12px]">Certified quality. Lasting trust.</span>
+    <section className={`${SHELL} bg-[#eeefe7] border-t border-[#e5e6df] border-b border-[#e0e2d9] flex items-center gap-[40px] [padding-top:34px] [padding-bottom:34px] max-[800px]:pt-[27px] max-[800px]:pb-[30px] max-[800px]:gap-[25px]`} id="proof" aria-label="Our legacy in numbers">
+      <div className="shrink-0 text-[14px] leading-[1.9] text-[#78807d] max-[1100px]:text-[13px] max-[520px]:text-[13px]">Rooted in Chennai.<br /><strong className="font-medium text-[#192e4e]">Trusted across India.</strong></div>
+      <div className="flex-1 min-w-0 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_6%,#000_94%,transparent)]">
+        <div className="flex w-max items-center" style={motion ? {animation:'marquee 28s linear infinite'} : undefined}>
+          {[0, 1].map(copy => <div key={copy} className="flex items-center shrink-0" aria-hidden={copy === 1 || undefined}>
+            {PROOF_STATS.map(st => <div key={st.label} className="flex items-center gap-[18px] border-l border-[#d8dcd4] pl-[36px] pr-[48px] py-[4px] whitespace-nowrap">
+              {st.icon && <span className="text-[44px] text-[#8a907d] border border-[#a3a791] outline outline-1 outline-[#a3a791] outline-offset-[3px] rounded-full w-[45px] h-[45px] flex items-center justify-center shrink-0">✧</span>}
+              <div className="flex flex-col gap-[4px]">
+                <strong className={`[font-family:var(--display)] font-medium tracking-[-1.5px] leading-[1.15] ${st.icon ? 'text-[24px]' : 'text-[41px]'}`}>{st.n}{st.u && <span className="text-[#a48653] text-[31px]">{st.u}</span>}</strong>
+                <span className="text-[14px] text-[#737b7b]">{st.label}</span>
+              </div>
+            </div>)}
+          </div>)}
         </div>
       </div>
     </section>
@@ -297,7 +315,7 @@ export default function HomePage() {
           </div>
         </div>
         <div data-reveal data-revealed={!motion || undefined} className={reveal}>
-          <span className="block text-[12px] font-bold tracking-[1.4px] text-[#dba34b] mb-[12px]">FEATURED ON VIJAY TV</span>
+          <span className="flex flex-col items-start gap-[10px] mb-[14px]"><img src="/images/vijay-tv-logo.png" alt="Vijay TV" className="h-[120px] w-auto block" /><span className="text-[14px] font-bold tracking-[1.4px] text-[#dba34b]">FEATURED ON VIJAY TV</span></span>
           <div className="relative [aspect-ratio:16/9] rounded-[14px] overflow-hidden shadow-[0_20px_50px_#15283330] border border-[#e3d6b8]">
             <iframe
               className="absolute inset-0 w-full h-full border-0"
